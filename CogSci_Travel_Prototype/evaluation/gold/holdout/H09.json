@@ -1,0 +1,45 @@
+{
+  "case_id": "H09",
+  "tags": [
+    "conflicting_sources",
+    "hard_time",
+    "defer"
+  ],
+  "expected_observations": [
+    {
+      "id": "H09-E01",
+      "category": "uncertainty",
+      "description": "A has conflicting 2-hour and 4.5-hour evidence; compliance with the travel cap is unresolved.",
+      "source_ids": [
+        "A.2",
+        "A.3",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "H09-E02",
+      "category": "unsupported_claim",
+      "description": "Advice selects one time without a basis for discarding the other.",
+      "source_ids": [
+        "A.2",
+        "A.3",
+        "advice"
+      ]
+    },
+    {
+      "id": "H09-E03",
+      "category": "question",
+      "description": "Ask how to establish which route time applies.",
+      "source_ids": [
+        "A.2",
+        "A.3"
+      ]
+    }
+  ],
+  "question_target": "Ask how to establish which route time applies.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

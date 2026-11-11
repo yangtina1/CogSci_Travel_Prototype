@@ -1,0 +1,46 @@
+{
+  "case_id": "H04",
+  "tags": [
+    "hard_budget",
+    "mandatory_fees",
+    "retain"
+  ],
+  "expected_observations": [
+    {
+      "id": "H04-E01",
+      "category": "constraint_conflict",
+      "description": "A costs $285+$65+$40=$390, exceeding the cap by $30.",
+      "source_ids": [
+        "A.1",
+        "A.2",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "H04-E02",
+      "category": "unsupported_claim",
+      "description": "The advertised package is not the total claimed by the advice.",
+      "source_ids": [
+        "A.1",
+        "A.2",
+        "advice"
+      ]
+    },
+    {
+      "id": "H04-E03",
+      "category": "question",
+      "description": "Focus on the complete price rather than the headline saving.",
+      "source_ids": [
+        "A.1",
+        "A.2",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Focus on the complete price rather than the headline saving.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

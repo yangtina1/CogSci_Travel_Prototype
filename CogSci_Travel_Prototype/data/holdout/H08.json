@@ -1,0 +1,93 @@
+{
+  "id": "H08",
+  "title": "Preference update without a destination change",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Oriel Bay",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $335, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has a beach and a small gallery."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Tamarind Town",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $360, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has a large art museum and no beach."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Prairie Quay",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $305, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 4 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has birdwatching trails and no indoor art activities."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 65,
+    "priorities": [
+      "Beach first, then art",
+      "Lower cost"
+    ],
+    "constraints": [
+      "Maximum cost $370"
+    ],
+    "reasons": "Oriel Bay gives me a beach and some art at a manageable price."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Tamarind Town provides more extensive art exhibits for $25 more."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 65,
+      "priorities": [
+        "Art first, then beach",
+        "Lower cost"
+      ],
+      "constraints": [
+        "Maximum cost $370"
+      ],
+      "reasons": "I now prioritize art over the beach, but the small gallery and lower total still make Oriel Bay my preference.",
+      "reflection": "I now prioritize art over the beach, but the small gallery and lower total still make Oriel Bay my preference."
+    }
+  ]
+}

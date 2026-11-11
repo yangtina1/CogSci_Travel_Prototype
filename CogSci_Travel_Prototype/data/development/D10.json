@@ -1,0 +1,93 @@
+{
+  "id": "D10",
+  "title": "None meets both firm limits",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "North Lantern",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $330, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has walking trails."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Green Shoal",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $280, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 5 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has coastal paths."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Mill Crossing",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $360, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 4 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has a museum."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "B",
+    "confidence": 40,
+    "priorities": [
+      "Nature walks"
+    ],
+    "constraints": [
+      "Cost at most $300",
+      "Travel at most 3 hours each way"
+    ],
+    "reasons": "Green Shoal is affordable but I am worried about the travel time."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "North Lantern is convenient, so it is the best available choice."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 30,
+      "priorities": [
+        "Nature walks"
+      ],
+      "constraints": [
+        "Cost at most $300",
+        "Travel at most 3 hours each way"
+      ],
+      "reasons": "I will seek other options because none meets both limits.",
+      "reflection": "I will seek other options because none meets both limits."
+    }
+  ]
+}

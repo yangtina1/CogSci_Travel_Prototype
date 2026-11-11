@@ -1,0 +1,43 @@
+{
+  "case_id": "D11",
+  "tags": [
+    "conflicting_sources",
+    "defer"
+  ],
+  "expected_observations": [
+    {
+      "id": "D11-E01",
+      "category": "uncertainty",
+      "description": "A has contradictory total quotes straddling the cap; neither quote can be preferred from the evidence.",
+      "source_ids": [
+        "A.1",
+        "A.2",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "D11-E02",
+      "category": "unsupported_claim",
+      "description": "Advice presents definite affordability by ignoring the higher quote.",
+      "source_ids": [
+        "A.2",
+        "advice"
+      ]
+    },
+    {
+      "id": "D11-E03",
+      "category": "question",
+      "description": "Ask how to resolve the conflicting totals before relying on affordability.",
+      "source_ids": [
+        "A.1",
+        "A.2"
+      ]
+    }
+  ],
+  "question_target": "Ask how to resolve the conflicting totals before relying on affordability.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

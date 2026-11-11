@@ -1,0 +1,93 @@
+{
+  "id": "H03",
+  "title": "A price range crosses the budget",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Granite Shore",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Estimated total cost ranges from $330 to $410; the final lodging rate is unresolved."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has a public beach."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Lilac Square",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Confirmed total cost is $375, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has a lakeside recreation area."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Saffron Bluff",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $420, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has coastal hikes."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 65,
+    "priorities": [
+      "Beach time",
+      "Low price"
+    ],
+    "constraints": [
+      "Maximum total cost $380"
+    ],
+    "reasons": "Granite Shore could be cheapest but I do not know the final rate."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Granite Shore starts at $330, so it is guaranteed to fit your $380 limit."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 55,
+      "priorities": [
+        "Beach time",
+        "Low price"
+      ],
+      "constraints": [
+        "Maximum total cost $380"
+      ],
+      "reasons": "I will confirm the final lodging rate before relying on the estimate.",
+      "reflection": "I will confirm the final lodging rate before relying on the estimate."
+    }
+  ]
+}

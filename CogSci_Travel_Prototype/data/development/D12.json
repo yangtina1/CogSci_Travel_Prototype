@@ -1,0 +1,95 @@
+{
+  "id": "D12",
+  "title": "Exactly on the boundary",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Ashwater",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is exactly $300, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes exactly 3 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has a sculpture park."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Brookfen",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $285, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has a lake but no art activities."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Coral Hill",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $340, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 4 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has art classes."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 70,
+    "priorities": [
+      "Art activities",
+      "Low cost when art is comparable"
+    ],
+    "constraints": [
+      "Total cost at most $300",
+      "Travel no more than 3 hours"
+    ],
+    "reasons": "Ashwater meets my limits and offers art."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Ashwater exactly meets your cost and travel maxima and offers a sculpture park."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 70,
+      "priorities": [
+        "Art activities",
+        "Low cost when art is comparable"
+      ],
+      "constraints": [
+        "Total cost at most $300",
+        "Travel no more than 3 hours"
+      ],
+      "reasons": "The exact totals meet my stated limits; I still prefer the art activity.",
+      "reflection": "The exact totals meet my stated limits; I still prefer the art activity."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "H02",
+  "title": "A shorter trip at the exact cap",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Blue Orchard",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total trip cost is $360, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 4 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has a botanic garden."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Wren Borough",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total trip cost is $390, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 1 hour."
+        },
+        {
+          "id": "B.3",
+          "text": "Has a small indoor plant conservatory."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Ivy Pass",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total trip cost is $410, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has forest trails."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 60,
+    "priorities": [
+      "Large outdoor gardens",
+      "Save money"
+    ],
+    "constraints": [
+      "Total cost at most $390"
+    ],
+    "reasons": "I prefer the garden and can tolerate four hours on the bus."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Wren Borough saves three hours of travel each way while meeting your cap exactly."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 60,
+      "priorities": [
+        "Large outdoor gardens",
+        "Save money"
+      ],
+      "constraints": [
+        "Total cost at most $390"
+      ],
+      "reasons": "A shorter trip is attractive, but the large garden still matters more to me.",
+      "reflection": "A shorter trip is attractive, but the large garden still matters more to me."
+    }
+  ]
+}

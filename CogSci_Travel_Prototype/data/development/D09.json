@@ -1,0 +1,93 @@
+{
+  "id": "D09",
+  "title": "A documented change of priorities",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Starling Park",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $220, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has free outdoor trails; indoor activities are unavailable."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Fable Town",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $275, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has indoor exhibits and a covered market."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Sunstone Bay",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $310, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has beaches and outdoor tours."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 70,
+    "priorities": [
+      "Outdoor walks",
+      "Minimize spending"
+    ],
+    "constraints": [
+      "Cost must not exceed $300"
+    ],
+    "reasons": "Starling Park is inexpensive and supports my outdoor plans."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Fable Town offers indoor activities for $275, although it costs more."
+  },
+  "followups": [
+    {
+      "action": "revise",
+      "choice": "B",
+      "confidence": 60,
+      "priorities": [
+        "Indoor activities",
+        "Low spending when compatible"
+      ],
+      "constraints": [
+        "Cost must not exceed $300"
+      ],
+      "reasons": "I now prioritize indoor activities over outdoor walks and accept the $55 increase.",
+      "reflection": "I now prioritize indoor activities over outdoor walks and accept the $55 increase."
+    }
+  ]
+}

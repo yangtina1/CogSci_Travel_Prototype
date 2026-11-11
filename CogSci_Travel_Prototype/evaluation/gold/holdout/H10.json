@@ -1,0 +1,44 @@
+{
+  "case_id": "H10",
+  "tags": [
+    "conditional_price",
+    "hard_budget",
+    "retain"
+  ],
+  "expected_observations": [
+    {
+      "id": "H10-E01",
+      "category": "constraint_conflict",
+      "description": "For a solo traveler A costs $460 and violates the $400 cap.",
+      "source_ids": [
+        "A.1",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "H10-E02",
+      "category": "unsupported_claim",
+      "description": "The $360 arithmetic assumes a second traveler contrary to the supplied solo requirement.",
+      "source_ids": [
+        "A.1",
+        "initial.constraints",
+        "advice"
+      ]
+    },
+    {
+      "id": "H10-E03",
+      "category": "question",
+      "description": "Ask whether the quoted rate’s eligibility condition matches this solo trip.",
+      "source_ids": [
+        "A.1",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Ask whether the quoted rate’s eligibility condition matches this solo trip.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

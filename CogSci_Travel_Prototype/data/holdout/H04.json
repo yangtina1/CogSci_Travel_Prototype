@@ -1,0 +1,93 @@
+{
+  "id": "H04",
+  "title": "A mandatory fee changes the total",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Thistle Cove",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Advertised transport and lodging package is $285."
+        },
+        {
+          "id": "A.2",
+          "text": "A mandatory $65 booking fee and $40 meal package are excluded from the advertised price; these complete the trip expenses."
+        },
+        {
+          "id": "A.3",
+          "text": "Travel takes 2 hours; has walking trails."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Opal Town",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $345, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2.5 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has heritage walks."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Clover Bay",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $370, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 1.5 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has a beach."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "B",
+    "confidence": 75,
+    "priorities": [
+      "Walking activities",
+      "Avoid unnecessary costs"
+    ],
+    "constraints": [
+      "Cost cannot exceed $360"
+    ],
+    "reasons": "Opal Town has a clear total that fits."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Thistle Cove is only $285, so it is cheaper and safely fits your limit."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "B",
+      "confidence": 75,
+      "priorities": [
+        "Walking activities",
+        "Avoid unnecessary costs"
+      ],
+      "constraints": [
+        "Cost cannot exceed $360"
+      ],
+      "reasons": "The complete Thistle Cove cost is $390 and exceeds my cap.",
+      "reflection": "The complete Thistle Cove cost is $390 and exceeds my cap."
+    }
+  ]
+}

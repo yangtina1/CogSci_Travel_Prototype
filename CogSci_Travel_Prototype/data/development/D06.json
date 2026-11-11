@@ -1,0 +1,95 @@
+{
+  "id": "D06",
+  "title": "An unverified promise",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Canal Bend",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total trip cost is $250, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Kayak rental is available; internet availability is not described."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Birch City",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total trip cost is $280, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Lodging provides verified Wi-Fi and nearby museums."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Dune Village",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total trip cost is $290, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 4 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Beach walks are available; lodging has no internet service."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "B",
+    "confidence": 60,
+    "priorities": [
+      "Kayaking if possible",
+      "Low price"
+    ],
+    "constraints": [
+      "Wi-Fi is required for a scheduled course check-in",
+      "Cost must not exceed $300"
+    ],
+    "reasons": "Birch City documents Wi-Fi."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Canal Bend has reliable Wi-Fi and kayaking, so it meets all your requirements."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 50,
+      "priorities": [
+        "Kayaking if possible",
+        "Low price"
+      ],
+      "constraints": [
+        "Wi-Fi is required for a scheduled course check-in",
+        "Cost must not exceed $300"
+      ],
+      "reasons": "I will confirm Canal Bend internet service before changing my choice.",
+      "reflection": "I will confirm Canal Bend internet service before changing my choice."
+    }
+  ]
+}

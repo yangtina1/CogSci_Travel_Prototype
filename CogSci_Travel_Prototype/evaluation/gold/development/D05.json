@@ -1,0 +1,45 @@
+{
+  "case_id": "D05",
+  "tags": [
+    "missing_cost",
+    "unsupported_reason",
+    "unsupported_advice",
+    "defer"
+  ],
+  "expected_observations": [
+    {
+      "id": "D05-E01",
+      "category": "uncertainty",
+      "description": "A has a $210 subtotal; total affordability is unknown, not a certain violation.",
+      "source_ids": [
+        "A.1",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "D05-E02",
+      "category": "unsupported_claim",
+      "description": "Both initial reason and advice treat a subtotal as a total.",
+      "source_ids": [
+        "A.1",
+        "initial.reasons",
+        "advice"
+      ]
+    },
+    {
+      "id": "D05-E03",
+      "category": "question",
+      "description": "Ask what missing expenses must be checked before treating A as affordable.",
+      "source_ids": [
+        "A.1",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Ask what missing expenses must be checked before treating A as affordable.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

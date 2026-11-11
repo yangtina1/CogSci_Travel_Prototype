@@ -1,0 +1,45 @@
+{
+  "case_id": "D01",
+  "tags": [
+    "supported_agreement",
+    "retain"
+  ],
+  "expected_observations": [
+    {
+      "id": "D01-E01",
+      "category": "support",
+      "description": "Advice agrees with the initial choice and the stated facts.",
+      "source_ids": [
+        "A.1",
+        "A.3",
+        "initial.choice",
+        "advice"
+      ]
+    },
+    {
+      "id": "D01-E02",
+      "category": "priority_fidelity",
+      "description": "Low spending and walks are flexible priorities; $300 is a firm cap.",
+      "source_ids": [
+        "initial.priorities",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "D01-E03",
+      "category": "question",
+      "description": "Ask about the basis of supported agreement without inventing a problem.",
+      "source_ids": [
+        "A.1",
+        "A.3",
+        "initial.reasons"
+      ]
+    }
+  ],
+  "question_target": "Ask about the basis of supported agreement without inventing a problem.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

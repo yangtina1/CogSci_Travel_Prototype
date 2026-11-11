@@ -1,0 +1,93 @@
+{
+  "id": "D08",
+  "title": "A spending preference is flexible",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Silver Glen",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $280, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Includes a guided art workshop."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Clayford",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $230, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has a free gallery but no workshops."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Hollow Lake",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $320, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has nature walks."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 65,
+    "priorities": [
+      "Prefer to spend around $250, but can pay more for an art workshop",
+      "Hands-on art"
+    ],
+    "constraints": [
+      "I cannot exceed $350"
+    ],
+    "reasons": "The workshop is worth the extra $30 above my preferred amount."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Clayford is under your preferred $250 and has a gallery."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 65,
+      "priorities": [
+        "Prefer to spend around $250, but can pay more for an art workshop",
+        "Hands-on art"
+      ],
+      "constraints": [
+        "I cannot exceed $350"
+      ],
+      "reasons": "My $250 target is flexible; I still value the workshop.",
+      "reflection": "My $250 target is flexible; I still value the workshop."
+    }
+  ]
+}

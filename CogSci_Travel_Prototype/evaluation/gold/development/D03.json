@@ -1,0 +1,46 @@
+{
+  "case_id": "D03",
+  "tags": [
+    "hard_budget",
+    "contradicted_advice",
+    "defer"
+  ],
+  "expected_observations": [
+    {
+      "id": "D03-E01",
+      "category": "constraint_conflict",
+      "description": "The advised $460 exceeds the firm $350 cap by $110.",
+      "source_ids": [
+        "B.1",
+        "initial.constraints",
+        "advice"
+      ]
+    },
+    {
+      "id": "D03-E02",
+      "category": "unsupported_claim",
+      "description": "The claim that $460 is within $350 contradicts the supplied numbers.",
+      "source_ids": [
+        "B.1",
+        "advice",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "D03-E03",
+      "category": "question",
+      "description": "Focus on reconciling the firm cap with the appealing hiking features; do not assume the cap can be increased.",
+      "source_ids": [
+        "B.1",
+        "B.3",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Focus on reconciling the firm cap with the appealing hiking features; do not assume the cap can be increased.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

@@ -1,0 +1,46 @@
+{
+  "case_id": "H06",
+  "tags": [
+    "missing_information",
+    "unsupported_advice",
+    "defer"
+  ],
+  "expected_observations": [
+    {
+      "id": "H06-E01",
+      "category": "unsupported_claim",
+      "description": "The absence of museum information does not support the advice’s assertion of no museums in A.",
+      "source_ids": [
+        "A.3",
+        "advice"
+      ]
+    },
+    {
+      "id": "H06-E02",
+      "category": "support",
+      "description": "B has explicit museum evidence and meets the cap.",
+      "source_ids": [
+        "B.1",
+        "B.3",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "H06-E03",
+      "category": "question",
+      "description": "Ask whether confirming A museum availability would affect the $25 tradeoff.",
+      "source_ids": [
+        "A.1",
+        "A.3",
+        "B.1",
+        "initial.priorities"
+      ]
+    }
+  ],
+  "question_target": "Ask whether confirming A museum availability would affect the $25 tradeoff.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

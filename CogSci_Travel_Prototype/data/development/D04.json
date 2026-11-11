@@ -1,0 +1,95 @@
+{
+  "id": "D04",
+  "title": "Cheap but too far",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Elm Harbor",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $270, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2.5 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Harbor walks are available."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Moss Plateau",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $210, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 7 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Nature trails are available."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Copper Village",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $290, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Craft workshops are available."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 70,
+    "priorities": [
+      "Keep costs low",
+      "Nature walks"
+    ],
+    "constraints": [
+      "No more than 3 hours of travel each way",
+      "Total cost no more than $300"
+    ],
+    "reasons": "Elm Harbor fits the travel window."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Moss Plateau saves $60, making it the practical budget choice."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 70,
+      "priorities": [
+        "Keep costs low",
+        "Nature walks"
+      ],
+      "constraints": [
+        "No more than 3 hours of travel each way",
+        "Total cost no more than $300"
+      ],
+      "reasons": "The seven-hour journey is incompatible with my available time.",
+      "reflection": "The seven-hour journey is incompatible with my available time."
+    }
+  ]
+}

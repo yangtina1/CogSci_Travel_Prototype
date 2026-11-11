@@ -1,0 +1,47 @@
+{
+  "case_id": "H11",
+  "tags": [
+    "all_infeasible",
+    "multiple_constraints",
+    "defer"
+  ],
+  "expected_observations": [
+    {
+      "id": "H11-E01",
+      "category": "constraint_conflict",
+      "description": "A exceeds cost, B fails access, and C exceeds travel time; none meets all firm requirements.",
+      "source_ids": [
+        "A.1",
+        "B.3",
+        "C.2",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "H11-E02",
+      "category": "priority_fidelity",
+      "description": "The advice cannot unilaterally relax the spending cap.",
+      "source_ids": [
+        "initial.constraints",
+        "advice"
+      ]
+    },
+    {
+      "id": "H11-E03",
+      "category": "question",
+      "description": "Support deciding what to investigate next without forcing a known violation.",
+      "source_ids": [
+        "A.1",
+        "B.3",
+        "C.2",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Support deciding what to investigate next without forcing a known violation.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

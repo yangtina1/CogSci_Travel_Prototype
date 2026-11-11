@@ -1,0 +1,93 @@
+{
+  "id": "D03",
+  "title": "The attractive trip exceeds the cap",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Lake Lantern",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $290, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Lakeside paths and basic camping are available."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Summit Vale",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $460, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Guided hikes and a cabin are available."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Orchard Town",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $310, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Garden tours are available."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 70,
+    "priorities": [
+      "Hiking",
+      "Comfort if affordable"
+    ],
+    "constraints": [
+      "I cannot spend more than $350"
+    ],
+    "reasons": "Lake Lantern seems manageable financially."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Summit Vale offers the best hiking and is within your $350 budget at $460."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 60,
+      "priorities": [
+        "Hiking",
+        "Comfort if affordable"
+      ],
+      "constraints": [
+        "I cannot spend more than $350"
+      ],
+      "reasons": "I will check cheaper hiking possibilities before choosing.",
+      "reflection": "I will check cheaper hiking possibilities before choosing."
+    }
+  ]
+}

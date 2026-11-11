@@ -1,0 +1,46 @@
+{
+  "case_id": "H01",
+  "tags": [
+    "supported_agreement",
+    "tradeoff",
+    "retain"
+  ],
+  "expected_observations": [
+    {
+      "id": "H01-E01",
+      "category": "support",
+      "description": "A meets the cap and agrees with the initial museum preference.",
+      "source_ids": [
+        "A.1",
+        "A.3",
+        "initial.priorities",
+        "advice"
+      ]
+    },
+    {
+      "id": "H01-E02",
+      "category": "tradeoff",
+      "description": "B offers a $25 saving but a different activity type.",
+      "source_ids": [
+        "A.1",
+        "B.1",
+        "B.3"
+      ]
+    },
+    {
+      "id": "H01-E03",
+      "category": "question",
+      "description": "Check the basis of museum preference without treating B’s lower cost as decisive.",
+      "source_ids": [
+        "initial.priorities",
+        "initial.reasons"
+      ]
+    }
+  ],
+  "question_target": "Check the basis of museum preference without treating B’s lower cost as decisive.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

@@ -1,0 +1,46 @@
+{
+  "case_id": "H07",
+  "tags": [
+    "unsupported_reason",
+    "high_confidence",
+    "revise"
+  ],
+  "expected_observations": [
+    {
+      "id": "H07-E01",
+      "category": "unsupported_claim",
+      "description": "Higher price is not evidence for A’s internet quality.",
+      "source_ids": [
+        "A.1",
+        "A.3",
+        "initial.reasons"
+      ]
+    },
+    {
+      "id": "H07-E02",
+      "category": "support",
+      "description": "B provides stated video-call suitability; this is supplied evidence, not a real-world guarantee.",
+      "source_ids": [
+        "B.3",
+        "initial.constraints",
+        "advice"
+      ]
+    },
+    {
+      "id": "H07-E03",
+      "category": "question",
+      "description": "Examine the price-to-quality assumption without using confidence 95 as validation.",
+      "source_ids": [
+        "initial.reasons",
+        "initial.confidence",
+        "A.3"
+      ]
+    }
+  ],
+  "question_target": "Examine the price-to-quality assumption without using confidence 95 as validation.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

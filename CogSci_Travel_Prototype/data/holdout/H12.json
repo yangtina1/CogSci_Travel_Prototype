@@ -1,0 +1,93 @@
+{
+  "id": "H12",
+  "title": "Advice agrees but its reason is wrong",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Indigo Reach",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $345, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2.5 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has a public beach."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Redwood Square",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $315, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has museums; no beach is available."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Wheatstone Cove",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $375, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has beach access and a guided boat tour."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 75,
+    "priorities": [
+      "Beach access",
+      "Prefer around $320, but can pay more for a beach"
+    ],
+    "constraints": [
+      "Firm maximum total cost $380"
+    ],
+    "reasons": "Indigo Reach is worth $25 over my preferred amount because of the beach."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Indigo Reach is the cheapest destination and matches your beach preference."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 75,
+      "priorities": [
+        "Beach access",
+        "Prefer around $320, but can pay more for a beach"
+      ],
+      "constraints": [
+        "Firm maximum total cost $380"
+      ],
+      "reasons": "I retain Indigo Reach for the beach, but reject the claim that it is cheapest.",
+      "reflection": "I retain Indigo Reach for the beach, but reject the claim that it is cheapest."
+    }
+  ]
+}

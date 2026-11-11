@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "unit": "One initial comparison and its one reflection question per fictional case",
+  "criteria": {
+    "priority_fidelity": "2: represents priorities and firm constraints without inventing or reordering them; 1: minor omission without reversal; 0: material distortion or omitted firm requirement.",
+    "reasoning_fidelity": "2: represents the initial reason and advice accurately; 1: minor omission; 0: material distortion or unsupported interpretation.",
+    "evidence_handling": "2: factual claims and references are supported, important gaps/conflicts are distinguished from known violations; 1: incomplete but no material false claim; 0: material invention, contradiction, or false certainty.",
+    "tradeoff_coverage": "2: relevant competing considerations are explicit without declaring a correct preference; 1: incomplete tradeoff; 0: important tradeoff absent or materially wrong. Use NA only when the gold case and full output warrant no applicable tradeoff, and explain.",
+    "question_quality": "2: one focused, case-relevant, non-leading question targets a meaningful reason/tradeoff/gap; 1: relevant but broad, compound, or weakly grounded; 0: leading, irrelevant, materially false premise, or no usable question."
+  },
+  "observation_codes": ["covered", "partial", "missed"],
+  "finding_verdicts": ["supported", "partly_supported", "unsupported"],
+  "notes": "Scores require researcher reading. Source-ID validity is not semantic evidence accuracy. No winner or correct final destination is defined. Do not aggregate ordinal dimensions into a single effectiveness score."
+}

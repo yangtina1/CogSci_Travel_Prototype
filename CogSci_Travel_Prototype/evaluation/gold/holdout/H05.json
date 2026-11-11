@@ -1,0 +1,45 @@
+{
+  "case_id": "H05",
+  "tags": [
+    "hard_access",
+    "missing_information",
+    "retain"
+  ],
+  "expected_observations": [
+    {
+      "id": "H05-E01",
+      "category": "constraint_conflict",
+      "description": "A’s stairs with no alternative violate the step-free requirement.",
+      "source_ids": [
+        "A.3",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "H05-E02",
+      "category": "uncertainty",
+      "description": "C access is unknown, not confirmed inaccessible or accessible.",
+      "source_ids": [
+        "C.3",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "H05-E03",
+      "category": "question",
+      "description": "Ask how the required entrance access limits the usefulness of the saving.",
+      "source_ids": [
+        "A.1",
+        "A.3",
+        "B.1",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Ask how the required entrance access limits the usefulness of the saving.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

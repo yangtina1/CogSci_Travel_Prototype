@@ -1,0 +1,93 @@
+{
+  "id": "D05",
+  "title": "A headline price is not a total",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Juniper Point",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Lodging and transport subtotal is $210; meal and activity costs are not supplied."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Beach access is available."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Stonebrook",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total trip cost is $295, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has a lake beach."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Amber Fields",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total trip cost is $340, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Garden walks are available."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 80,
+    "priorities": [
+      "Beach time",
+      "Spend as little as practical"
+    ],
+    "constraints": [
+      "Total trip cost must be at most $300"
+    ],
+    "reasons": "Juniper Point is only $210 so I am sure it fits."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Juniper Point costs only $210 in total and is safely within budget."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 70,
+      "priorities": [
+        "Beach time",
+        "Spend as little as practical"
+      ],
+      "constraints": [
+        "Total trip cost must be at most $300"
+      ],
+      "reasons": "I need meal and activity costs before deciding.",
+      "reflection": "I need meal and activity costs before deciding."
+    }
+  ]
+}

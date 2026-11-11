@@ -1,0 +1,45 @@
+{
+  "case_id": "D04",
+  "tags": [
+    "hard_time",
+    "retain"
+  ],
+  "expected_observations": [
+    {
+      "id": "D04-E01",
+      "category": "constraint_conflict",
+      "description": "B violates the 3-hour limit even though it is cheaper.",
+      "source_ids": [
+        "B.2",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "D04-E02",
+      "category": "support",
+      "description": "A meets both the cost and travel limits.",
+      "source_ids": [
+        "A.1",
+        "A.2",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "D04-E03",
+      "category": "question",
+      "description": "Ask how the travel limit constrains the relevance of the saving.",
+      "source_ids": [
+        "A.1",
+        "B.1",
+        "B.2",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Ask how the travel limit constrains the relevance of the saving.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

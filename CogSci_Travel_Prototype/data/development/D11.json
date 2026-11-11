@@ -1,0 +1,93 @@
+{
+  "id": "D11",
+  "title": "Two conflicting quotes",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Fox Hollow",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "A package brochure states total cost is $270 including all expenses."
+        },
+        {
+          "id": "A.2",
+          "text": "A booking summary states total cost is $340 including all expenses; neither source is identified as newer."
+        },
+        {
+          "id": "A.3",
+          "text": "Travel takes 2 hours; walking trails are available."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Cloud Harbor",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $295, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has waterfront walks."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Hazel Grove",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $315, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has garden paths."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 55,
+    "priorities": [
+      "Low cost",
+      "Walks"
+    ],
+    "constraints": [
+      "Maximum total cost is $300"
+    ],
+    "reasons": "Fox Hollow may be affordable, but I noticed two prices."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Fox Hollow costs $270 and therefore meets your limit."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 45,
+      "priorities": [
+        "Low cost",
+        "Walks"
+      ],
+      "constraints": [
+        "Maximum total cost is $300"
+      ],
+      "reasons": "I need to resolve which quote applies before booking.",
+      "reflection": "I need to resolve which quote applies before booking."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "H06",
+  "title": "A missing activity is not necessarily absent",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Lumen Harbor",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $325, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "The description lists a ferry tour and markets; it gives no information on museums."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Petal City",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $350, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has two museums and a market."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Quartz Fields",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $390, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has sculpture workshops."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 60,
+    "priorities": [
+      "Museums if possible",
+      "Save money"
+    ],
+    "constraints": [
+      "Maximum total $370"
+    ],
+    "reasons": "Lumen Harbor is cheaper, and I might find a museum there."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Lumen Harbor has no museums, so Petal City is your only museum option."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 50,
+      "priorities": [
+        "Museums if possible",
+        "Save money"
+      ],
+      "constraints": [
+        "Maximum total $370"
+      ],
+      "reasons": "I will check whether Lumen Harbor has museums before deciding.",
+      "reflection": "I will check whether Lumen Harbor has museums before deciding."
+    }
+  ]
+}

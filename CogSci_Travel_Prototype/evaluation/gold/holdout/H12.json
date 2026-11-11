@@ -1,0 +1,47 @@
+{
+  "case_id": "H12",
+  "tags": [
+    "agreement_wrong_reason",
+    "soft_budget",
+    "retain"
+  ],
+  "expected_observations": [
+    {
+      "id": "H12-E01",
+      "category": "unsupported_claim",
+      "description": "B costs $315, so advice claiming A at $345 is cheapest is contradicted.",
+      "source_ids": [
+        "A.1",
+        "B.1",
+        "advice"
+      ]
+    },
+    {
+      "id": "H12-E02",
+      "category": "priority_fidelity",
+      "description": "$320 is flexible and $380 is the firm cap; retaining A can be reasonable despite a faulty advice rationale.",
+      "source_ids": [
+        "initial.priorities",
+        "initial.constraints",
+        "initial.reasons"
+      ]
+    },
+    {
+      "id": "H12-E03",
+      "category": "question",
+      "description": "Ask which part of the agreeing recommendation is supported without equating agreement with accurate reasoning.",
+      "source_ids": [
+        "initial.reasons",
+        "A.3",
+        "B.1",
+        "advice"
+      ]
+    }
+  ],
+  "question_target": "Ask which part of the agreeing recommendation is supported without equating agreement with accurate reasoning.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

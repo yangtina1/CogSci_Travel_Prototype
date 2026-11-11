@@ -1,0 +1,43 @@
+{
+  "case_id": "D06",
+  "tags": [
+    "unsupported_advice",
+    "missing_information",
+    "defer"
+  ],
+  "expected_observations": [
+    {
+      "id": "D06-E01",
+      "category": "unsupported_claim",
+      "description": "A Wi-Fi claim is unsupported; it is not evidence that Wi-Fi is absent.",
+      "source_ids": [
+        "A.3",
+        "advice"
+      ]
+    },
+    {
+      "id": "D06-E02",
+      "category": "support",
+      "description": "B explicitly meets the Wi-Fi requirement.",
+      "source_ids": [
+        "B.3",
+        "initial.constraints"
+      ]
+    },
+    {
+      "id": "D06-E03",
+      "category": "question",
+      "description": "Focus on confirming the internet requirement before relying on the advice.",
+      "source_ids": [
+        "A.3",
+        "initial.constraints"
+      ]
+    }
+  ],
+  "question_target": "Focus on confirming the internet requirement before relying on the advice.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

@@ -1,0 +1,95 @@
+{
+  "id": "H10",
+  "title": "A group rate needs its stated condition",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Jade Hollow",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Package costs $720 for exactly two travelers sharing; individual bookings cost $460 per traveler. Both rates include all expenses."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has a lake and walking paths."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Copper Marsh",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total individual trip cost is $395, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has boardwalk trails."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Violet Borough",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total individual trip cost is $410, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 1 hour."
+        },
+        {
+          "id": "C.3",
+          "text": "Has a botanical conservatory."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "B",
+    "confidence": 70,
+    "priorities": [
+      "Nature walks",
+      "Lower cost"
+    ],
+    "constraints": [
+      "I am traveling alone",
+      "Maximum total individual cost $400"
+    ],
+    "reasons": "Copper Marsh fits the solo cost limit."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Split the $720 package in half: Jade Hollow is $360 each and fits your budget."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "B",
+      "confidence": 70,
+      "priorities": [
+        "Nature walks",
+        "Lower cost"
+      ],
+      "constraints": [
+        "I am traveling alone",
+        "Maximum total individual cost $400"
+      ],
+      "reasons": "There is no second traveler, so the applicable Jade Hollow price is $460.",
+      "reflection": "There is no second traveler, so the applicable Jade Hollow price is $460."
+    }
+  ]
+}

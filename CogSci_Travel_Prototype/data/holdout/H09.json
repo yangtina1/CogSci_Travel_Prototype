@@ -1,0 +1,99 @@
+{
+  "id": "H09",
+  "title": "Conflicting travel times",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Hearth Cove",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $355, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "A bus listing gives a 2-hour one-way trip."
+        },
+        {
+          "id": "A.3",
+          "text": "A route notice gives a 4.5-hour one-way trip; neither item has a date or precedence rule."
+        },
+        {
+          "id": "A.4",
+          "text": "Has beach walks."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Garnet Park",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $370, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2.5 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has wooded paths."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Laurel Port",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $385, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has waterfront trails."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 55,
+    "priorities": [
+      "Beach walks",
+      "Low cost"
+    ],
+    "constraints": [
+      "Travel at most 3 hours each way",
+      "Cost at most $390"
+    ],
+    "reasons": "Hearth Cove looks good if the two-hour time is accurate."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Hearth Cove is only two hours away and meets your travel limit."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 45,
+      "priorities": [
+        "Beach walks",
+        "Low cost"
+      ],
+      "constraints": [
+        "Travel at most 3 hours each way",
+        "Cost at most $390"
+      ],
+      "reasons": "I need to resolve the route information before relying on the short travel time.",
+      "reflection": "I need to resolve the route information before relying on the short travel time."
+    }
+  ]
+}

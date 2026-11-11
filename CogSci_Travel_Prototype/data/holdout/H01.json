@@ -1,0 +1,93 @@
+{
+  "id": "H01",
+  "title": "An affordable museum preference",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Rosehaven",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total trip cost is $365, including all expenses."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Has three museums and no beach."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Salt Meadow",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total trip cost is $340, including all expenses."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2.5 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Has a beach and no museums."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Aspen Reach",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total trip cost is $430, including all expenses."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has guided mountain tours."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 80,
+    "priorities": [
+      "Museums before beach activities",
+      "Lower cost if interests are equally met"
+    ],
+    "constraints": [
+      "Maximum total cost $400"
+    ],
+    "reasons": "The museums are worth the extra $25 to me."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Rosehaven fits your cap and your explicit museum priority."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 80,
+      "priorities": [
+        "Museums before beach activities",
+        "Lower cost if interests are equally met"
+      ],
+      "constraints": [
+        "Maximum total cost $400"
+      ],
+      "reasons": "The recommendation is consistent with my original museum priority.",
+      "reflection": "The recommendation is consistent with my original museum priority."
+    }
+  ]
+}

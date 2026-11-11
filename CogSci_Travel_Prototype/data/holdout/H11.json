@@ -1,0 +1,95 @@
+{
+  "id": "H11",
+  "title": "All choices conflict in different ways",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Crane Hill",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $405, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Step-free lodging entrance is documented."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Velvet Harbor",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $370, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Lodging has stairs and explicitly no step-free entrance."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Citrine Glen",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $380, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 5 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Step-free lodging entrance is documented."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "C",
+    "confidence": 45,
+    "priorities": [
+      "A quiet break"
+    ],
+    "constraints": [
+      "Cost at most $390",
+      "Travel at most 3 hours each way",
+      "Step-free lodging entrance required"
+    ],
+    "reasons": "Citrine Glen fits price and access but is far away."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Crane Hill is convenient and accessible; you should simply spend the extra $15."
+  },
+  "followups": [
+    {
+      "action": "defer",
+      "choice": null,
+      "confidence": 35,
+      "priorities": [
+        "A quiet break"
+      ],
+      "constraints": [
+        "Cost at most $390",
+        "Travel at most 3 hours each way",
+        "Step-free lodging entrance required"
+      ],
+      "reasons": "I cannot relax these limits, so I will look for other destinations.",
+      "reflection": "I cannot relax these limits, so I will look for other destinations."
+    }
+  ]
+}

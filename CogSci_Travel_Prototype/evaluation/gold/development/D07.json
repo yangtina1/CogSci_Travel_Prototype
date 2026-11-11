@@ -1,0 +1,44 @@
+{
+  "case_id": "D07",
+  "tags": [
+    "unsupported_reason",
+    "revise"
+  ],
+  "expected_observations": [
+    {
+      "id": "D07-E01",
+      "category": "unsupported_claim",
+      "description": "The place name does not substantiate the traveler’s quietness assumption.",
+      "source_ids": [
+        "initial.reasons",
+        "A.3"
+      ]
+    },
+    {
+      "id": "D07-E02",
+      "category": "tradeoff",
+      "description": "B costs $25 more but has explicit quiet-zone evidence.",
+      "source_ids": [
+        "A.1",
+        "B.1",
+        "B.3"
+      ]
+    },
+    {
+      "id": "D07-E03",
+      "category": "question",
+      "description": "Invite examination of the quietness assumption without treating high confidence as proof.",
+      "source_ids": [
+        "initial.reasons",
+        "initial.confidence",
+        "A.3"
+      ]
+    }
+  ],
+  "question_target": "Invite examination of the quietness assumption without treating high confidence as proof.",
+  "prohibited_inferences": [
+    "Do not score the selected destination as correct or incorrect.",
+    "Do not infer student behavior or cognitive improvement from scripted follow-ups."
+  ],
+  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+}

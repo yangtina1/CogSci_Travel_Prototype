@@ -1,0 +1,95 @@
+{
+  "id": "H05",
+  "title": "Affordable does not mean accessible",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Mica Village",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $310, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Lodging entrance has three steps and no ramp or alternative entrance."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Cypress Port",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $365, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Lodging and listed paths have step-free access."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Bramble Lake",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $350, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Lodging access details are not supplied."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "B",
+    "confidence": 80,
+    "priorities": [
+      "Low cost",
+      "Outdoor scenery"
+    ],
+    "constraints": [
+      "Step-free lodging entrance is required",
+      "Maximum total cost $380"
+    ],
+    "reasons": "Cypress Port documents the entrance access I need."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Mica Village saves $55 and is therefore the most suitable budget option."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "B",
+      "confidence": 80,
+      "priorities": [
+        "Low cost",
+        "Outdoor scenery"
+      ],
+      "constraints": [
+        "Step-free lodging entrance is required",
+        "Maximum total cost $380"
+      ],
+      "reasons": "The cheaper option explicitly fails the access requirement.",
+      "reflection": "The cheaper option explicitly fails the access requirement."
+    }
+  ]
+}

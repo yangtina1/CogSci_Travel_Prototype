@@ -1,0 +1,93 @@
+{
+  "id": "D07",
+  "title": "Checking the traveler’s assumption",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Marble Port",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total trip cost is $260, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Music venues are listed; lodging noise level is not documented."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Quiet Vale",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total trip cost is $285, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Lodging is in a designated quiet zone with a 10 pm noise policy."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Reed Island",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total trip cost is $310, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 4 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Birdwatching trails are available."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 90,
+    "priorities": [
+      "A quiet place to rest",
+      "Low cost"
+    ],
+    "constraints": [
+      "Cost no more than $320"
+    ],
+    "reasons": "Marble Port must be quiet because its name sounds peaceful."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Quiet Vale has a documented quiet zone and fits your spending limit."
+  },
+  "followups": [
+    {
+      "action": "revise",
+      "choice": "B",
+      "confidence": 80,
+      "priorities": [
+        "A quiet place to rest",
+        "Low cost"
+      ],
+      "constraints": [
+        "Cost no more than $320"
+      ],
+      "reasons": "I had no evidence that Marble Port was quiet; the documented policy matters to me.",
+      "reflection": "I had no evidence that Marble Port was quiet; the documented policy matters to me."
+    }
+  ]
+}

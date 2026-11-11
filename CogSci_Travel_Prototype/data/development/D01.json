@@ -1,0 +1,93 @@
+{
+  "id": "D01",
+  "title": "A supported low-cost break",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Maple Quay",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total trip cost is $240, including transport, lodging, meals, and listed activities."
+        },
+        {
+          "id": "A.2",
+          "text": "One-way travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Free riverside walks and a history museum are available."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Cedar Bay",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total trip cost is $320, including all trip expenses."
+        },
+        {
+          "id": "B.2",
+          "text": "One-way travel takes 3 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Beach access and kayaking are available."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Pine Ridge",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total trip cost is $390, including all trip expenses."
+        },
+        {
+          "id": "C.2",
+          "text": "One-way travel takes 5 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Guided mountain hikes are available."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 75,
+    "priorities": [
+      "Spend less where possible",
+      "Easy walks"
+    ],
+    "constraints": [
+      "Total spending must not exceed $300"
+    ],
+    "reasons": "Maple Quay leaves room in my budget and has walks."
+  },
+  "advice": {
+    "choice": "A",
+    "text": "Choose Maple Quay: the $240 total fits your $300 cap and its walks match your interests."
+  },
+  "followups": [
+    {
+      "action": "retain",
+      "choice": "A",
+      "confidence": 75,
+      "priorities": [
+        "Spend less where possible",
+        "Easy walks"
+      ],
+      "constraints": [
+        "Total spending must not exceed $300"
+      ],
+      "reasons": "I still prefer Maple Quay because the stated total and walks fit my priorities.",
+      "reflection": "I still prefer Maple Quay because the stated total and walks fit my priorities."
+    }
+  ]
+}

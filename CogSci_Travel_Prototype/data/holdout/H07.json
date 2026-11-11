@@ -1,0 +1,95 @@
+{
+  "id": "H07",
+  "title": "Price is not evidence of internet quality",
+  "context": "Fictional budget-conscious university student planning a three-day leisure trip. All prices are USD per traveler for the whole trip unless a fact explicitly says otherwise. Travel times are one-way. Only the supplied descriptions count as evidence; no real destinations or prices are represented.",
+  "options": [
+    {
+      "id": "A",
+      "name": "Topaz Ridge",
+      "facts": [
+        {
+          "id": "A.1",
+          "text": "Total cost is $440, all expenses included."
+        },
+        {
+          "id": "A.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "A.3",
+          "text": "Lodging internet service is not described."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Acorn Wharf",
+      "facts": [
+        {
+          "id": "B.1",
+          "text": "Total cost is $380, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 3 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Lodging has a wired connection; provider describes it as sufficient for video calls."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Flint Garden",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $360, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Lodging explicitly has no internet."
+        }
+      ]
+    }
+  ],
+  "initial": {
+    "choice": "A",
+    "confidence": 95,
+    "priorities": [
+      "Comfort",
+      "Keep spending low"
+    ],
+    "constraints": [
+      "Internet for one scheduled video meeting is required",
+      "Maximum cost $450"
+    ],
+    "reasons": "Topaz Ridge is expensive so its internet must be fast."
+  },
+  "advice": {
+    "choice": "B",
+    "text": "Acorn Wharf documents a connection suitable for video calls and costs $60 less."
+  },
+  "followups": [
+    {
+      "action": "revise",
+      "choice": "B",
+      "confidence": 85,
+      "priorities": [
+        "Comfort",
+        "Keep spending low"
+      ],
+      "constraints": [
+        "Internet for one scheduled video meeting is required",
+        "Maximum cost $450"
+      ],
+      "reasons": "My assumption about price was unsupported, and the stated connection information matters.",
+      "reflection": "My assumption about price was unsupported, and the stated connection information matters."
+    }
+  ]
+}
