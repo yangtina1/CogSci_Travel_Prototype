@@ -17,9 +17,22 @@ class GenerationError(RuntimeError):
         self.artifact = artifact or {}
 
 
+def comparison_error_message(exc):
+    """Readable failure categories without exposing API responses or credentials."""
+    status = getattr(exc, "artifact", {}).get("http_status")
+    messages = {
+        400: "The comparison request was rejected. The app owner needs to check the model settings and account eligibility.",
+        401: "Gemini could not authenticate the request. The app owner needs to check the API key.",
+        403: "Gemini denied access. The app owner needs to check the API key permissions and project access.",
+        404: "The configured model is unavailable for this request. The app owner needs to update or check the model configuration.",
+        429: "Gemini's usage limit has been reached. Please wait for the quota to reset before trying again.",
+    }
+    return messages.get(status, "The comparison is currently unavailable. Download this decision record to preserve the error details for troubleshooting.")
+
+
 def settings():
     value = read_json(ROOT / "config/model.json")
-    require(set(value) == {"provider", "model", "max_output_tokens", "temperature", "thinking_budget", "timeout_seconds"},
+    require(set(value) == {"provider", "model", "max_output_tokens", "temperature", "thinking_level", "timeout_seconds"},
             "Unexpected model configuration fields.")
     require(value["provider"] == "gemini", "This adapter supports Gemini only.")
     require(isinstance(value["model"], str) and re.fullmatch(r"[A-Za-z0-9._-]+", value["model"]), "Specify a model identifier, not a URL.")
@@ -28,8 +41,8 @@ def settings():
             "Timeout must be 1 to 600 seconds.")
     require(value["temperature"] is None or (type(value["temperature"]) in (int, float)
             and 0 <= value["temperature"] <= 2), "Invalid temperature.")
-    require(type(value["thinking_budget"]) is int and value["thinking_budget"] == 0,
-            "This free-tier setup fixes thinking_budget at 0.")
+    require(value["thinking_level"] == "minimal",
+            "This low-token setup fixes thinking_level at minimal.")
     return value
 
 
@@ -42,7 +55,7 @@ def build_request(payload, config=None):
             "maxOutputTokens": config["max_output_tokens"],
             "temperature": config["temperature"],
             "candidateCount": 1,
-            "thinkingConfig": {"thinkingBudget": config["thinking_budget"]},
+            "thinkingConfig": {"thinkingLevel": config["thinking_level"]},
             "responseMimeType": "application/json",
             "responseJsonSchema": read_json(ROOT / "schemas/comparison.json")}}
 
