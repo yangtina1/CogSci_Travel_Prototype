@@ -11,7 +11,7 @@ import streamlit as st
 from metacog.cloud import bundle_bytes, new_run, restore_bundle, run_next
 from metacog.core import ROOT, Workflow, case_paths, load_case, model_input, now, read_json, source_catalog, write_json
 from metacog.evaluation import freeze, prepare_review, summarize, verify_manifest
-from metacog.provider import GenerationError, generate, settings
+from metacog.provider import GenerationError, comparison_error_message, generate, settings
 
 st.set_page_config(page_title="Pause & Compare · Student Travel", page_icon="🧭", layout="wide")
 
@@ -169,7 +169,7 @@ def workspace(key):
                     st.rerun()
                 except (ValueError, GenerationError) as exc:
                     st.session_state.workspace_generation_errors.append({"at": now(), "error": str(exc), "generation": getattr(exc, "artifact", {})})
-                    st.error("The comparison is currently unavailable. Please try again later.")
+                    st.error(comparison_error_message(exc))
                     st.caption("No comparison was generated. Your original reasoning is preserved.")
         if live_comparison:
             st.write("**AI comparison of your reasoning and the advice**")
