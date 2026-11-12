@@ -360,7 +360,10 @@ def main():
     key = api_key()
     with st.sidebar:
         st.subheader("LLM status")
-        st.success("LLM configured") if key else st.info("LLM not connected")
+        if key:
+            st.success("LLM configured")
+        else:
+            st.info("LLM not connected")
     page = st.query_params.get("view", "workspace")
     if page not in ("research", "setup"):
         workspace(key)
