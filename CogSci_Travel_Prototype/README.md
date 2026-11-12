@@ -31,7 +31,18 @@ Streamlit can run an entrypoint in a repository subfolder and find the dependenc
 4. Use Gemini to compare the reasoning and advice with the evidence and generate one reflection question.
 5. Preserve subsequent reflection, retained or revised preferences, updated priorities, or a decision to defer.
 
-Destination descriptions, the recommendation, and traveler responses are scripted during research. Only the comparison and reflection question use the LLM. The clearly labeled Software preview is for interface checks and is not a research result.
+Destination descriptions, the recommendation, and traveler responses are scripted during research. Only the comparison and reflection question use the LLM. Without an LLM connection, the app shows an availability notice and disables comparison generation. It does not display a scripted comparison or reflection question.
+
+## Researcher access
+
+The normal app URL opens the user workspace, with only LLM status in the sidebar. Research and setup controls are available separately by adding these endings to the app URL:
+
+- `?view=research`: run cases, review outputs, freeze, and export.
+- `?view=setup`: model information and setup instructions.
+
+For example, use `https://your-app.streamlit.app/?view=research`. These are separate views, not password protection; retain the hosting platform's private sharing settings. “LLM configured” means a key is present, not that a request has been validated.
+
+The user-facing “Reveal AI advice” action shows the fixed recommendation with a demo note. Actual comparison and reflection-question generation still require the live LLM. Subsequent responses remain tied to that initial comparison; they do not automatically trigger another call.
 
 ## Evaluation
 

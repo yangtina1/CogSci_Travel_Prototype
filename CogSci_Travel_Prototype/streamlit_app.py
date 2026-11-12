@@ -45,6 +45,35 @@ def judgment_view(value, names):
     safe_text(value["reasons"])
 
 
+def evidence_view(payload, source_ids):
+    """Present source content in reader language; keep internal IDs in exports only."""
+    catalog = source_catalog(payload)
+    names = {option["id"]: option["name"] for option in payload["options"]}
+    labels = {
+        "initial.choice": "Your initial destination",
+        "initial.confidence": "Your initial confidence",
+        "initial.priorities": "Your initial priorities",
+        "initial.constraints": "Your initial requirements",
+        "initial.reasons": "Your initial reasons",
+        "advice": "AI advice shown in this demo",
+    }
+    for option in payload["options"]:
+        for index, fact in enumerate(option["facts"], 1):
+            labels[fact["id"]] = option["name"] + " · detail " + str(index)
+    for source_id in source_ids:
+        st.caption(labels.get(source_id, "Supporting information"))
+        value = catalog[source_id]
+        if source_id == "initial.choice":
+            safe_text(names.get(value, value))
+        elif source_id == "initial.confidence":
+            safe_text(str(value) + "/100 (self-report)")
+        elif isinstance(value, list):
+            for item in value or ["None stated"]:
+                safe_text("• " + item)
+        else:
+            safe_text(value)
+
+
 def comparison_view(comparison, payload):
     safe_text(comparison["summary"])
     with st.expander("How the model interpreted the original reasoning", expanded=True):
@@ -52,7 +81,6 @@ def comparison_view(comparison, payload):
         safe_text(comparison["priorities_interpretation"])
         st.write("**Reasons**")
         safe_text(comparison["reasoning_interpretation"])
-    catalog = source_catalog(payload)
     labels = {"support": "Supporting evidence", "constraint_conflict": "Firm requirement conflict",
               "tradeoff": "Flexible tradeoff", "unsupported_claim": "Unsupported claim", "uncertainty": "Unresolved information"}
     for item in comparison["findings"]:
@@ -60,14 +88,12 @@ def comparison_view(comparison, payload):
             st.write("**" + labels[item["kind"]] + "**")
             safe_text(item["text"])
             with st.expander("Inspect cited evidence"):
-                for source_id in item["source_ids"]:
-                    st.caption(source_id)
-                    safe_text(json.dumps(catalog[source_id], ensure_ascii=False) if not isinstance(catalog[source_id], str) else catalog[source_id])
+                evidence_view(payload, item["source_ids"])
     st.write("**A question to consider**")
     safe_text(comparison["reflection_question"]["text"])
     with st.expander("Question sources and limits"):
-        for source in comparison["reflection_question"]["source_ids"]:
-            safe_text(source + ": " + str(catalog[source]))
+        evidence_view(payload, comparison["reflection_question"]["source_ids"])
+        st.caption("Limits of this comparison")
         for limitation in comparison["limitations"]:
             safe_text(limitation)
 
@@ -77,7 +103,7 @@ def workspace(key):
     st.caption("Three destinations. Your reasoning first. Advice second. Then a chance to reflect.")
     cases = [load_case(p.stem) for p in case_paths("development")]
     options = {c["id"]: c for c in cases}
-    selected = st.selectbox("Development scenario", list(options),
+    selected = st.selectbox("Demo scenario", list(options),
                             format_func=lambda i: i + " · " + options[i]["title"])
     if "flow" not in st.session_state:
         st.session_state.flow = Workflow(options[selected])
@@ -88,6 +114,7 @@ def workspace(key):
         st.session_state.workspace_generation_errors = []
         st.rerun()
     case, record = flow.case, flow.record
+    live_comparison = bool(record["comparison"] and (record.get("generation") or {}).get("backend") == "live")
     names = {o["id"]: o["name"] for o in case["options"]}
     st.caption("Current decision: " + case["id"] + " · " + case["title"])
     st.info(case["context"])
@@ -122,34 +149,34 @@ def workspace(key):
         judgment_view(record["initial"], names)
     with right:
         st.subheader("2 · Examine advice and evidence")
+        st.caption("Demo note: scripted advice is used in this demonstration. It represents AI advice and is not generated live.")
         if record["stage"] == "committed":
-            if st.button("Reveal scripted advice", type="primary"):
+            if st.button("Reveal AI advice", type="primary"):
                 flow.reveal()
                 st.rerun()
         if record["advice"]:
-            st.caption("PREWRITTEN RECOMMENDATION · This is the advice being examined, not a new model response.")
+            st.write("**AI advice**")
             safe_text(record["advice"]["text"])
         if record["stage"] == "advice":
-            mode = st.radio("Comparison mode", ["Live Gemini", "Software preview (no LLM)"], index=0 if key else 1)
-            if mode.startswith("Software"):
-                st.warning("Preview checks the workflow only. It does not analyze this case or count as a study result.")
-            if not key and mode == "Live Gemini":
-                st.info("Add GEMINI_API_KEY in the cloud app's Settings → Secrets, then reboot the app.")
-            if st.button("Generate comparison and question", disabled=mode == "Live Gemini" and not key, type="primary"):
+            if not key:
+                st.info("The LLM is not connected. You can view the demo advice, but a comparison and reflection question will be available only after the LLM is configured.")
+            if st.button("Generate comparison and question", disabled=not key, type="primary"):
                 try:
                     with st.spinner("Comparing the stated reasoning with the evidence…"):
                         output, generation = generate(model_input(case, record["initial"]),
-                                                      "live" if mode == "Live Gemini" else "fixture", api_key=key)
+                                                      "live", api_key=key)
                     flow.attach_comparison(output, generation)
                     st.rerun()
                 except (ValueError, GenerationError) as exc:
                     st.session_state.workspace_generation_errors.append({"at": now(), "error": str(exc), "generation": getattr(exc, "artifact", {})})
-                    st.error(str(exc))
-                    st.caption("No response was substituted. A new click makes a new attempt; failed attempts remain in the export.")
-        if record["comparison"]:
-            st.caption("LLM-GENERATED COMPARISON" if record["generation"]["backend"] == "live" else "SOFTWARE FIXTURE · NOT LLM-GENERATED")
+                    st.error("The comparison is currently unavailable. Please try again later.")
+                    st.caption("No comparison was generated. Your original reasoning is preserved.")
+        if live_comparison:
+            st.write("**AI comparison of your reasoning and the advice**")
             comparison_view(record["comparison"], model_input(case, record["initial"]))
-    if record["comparison"]:
+        elif record["comparison"]:
+            st.info("This decision contains an earlier software preview, not an LLM comparison. Download the record if needed, then start a new decision to request a real comparison.")
+    if live_comparison:
         st.subheader("3 · Record reflection and next decision")
         st.caption("The comparison refers to your preserved initial reasoning. New responses are saved separately; they do not rewrite the original or trigger another model call.")
         previous = record["followups"][-1] if record["followups"] else record["initial"]
@@ -332,19 +359,25 @@ def main():
     st.caption("Supporting metacognitive monitoring in AI-assisted decision-making · CS 6795")
     key = api_key()
     with st.sidebar:
-        st.subheader("Student travel workspace")
-        st.write("Examine how advice fits your stated priorities, firm requirements, and evidence.")
-        st.caption("All research scenarios and traveler responses are fictional.")
-        st.divider()
-        st.write("Model: " + settings()["model"])
-        st.caption("One call per comparison · 1,800 output tokens maximum · No automatic retries")
-        st.success("Cloud API key is configured") if key else st.info("Cloud API key not configured")
-        page = st.radio("Open", ["Decision workspace", "Research console", "Setup and study boundaries"])
-    if page == "Decision workspace":
+        st.subheader("LLM status")
+        st.success("LLM configured") if key else st.info("LLM not connected")
+    page = st.query_params.get("view", "workspace")
+    if page not in ("research", "setup"):
         workspace(key)
-    elif page == "Research console":
+        return
+    st.caption("Researcher area")
+    left, middle, right = st.columns(3)
+    for column, label, destination in ((left, "Decision workspace", "workspace"),
+                                       (middle, "Research console", "research"),
+                                       (right, "Setup", "setup")):
+        if column.button(label, disabled=page == destination):
+            st.query_params["view"] = destination
+            st.rerun()
+    if page == "research":
         research_console(key)
     else:
+        st.write("Configured model: " + settings()["model"])
+        st.caption("LLM configured means a key is present. A successful comparison is needed to confirm model access.")
         st.subheader("What is scripted and what uses the LLM?")
         st.table({"Component": ["Destination descriptions", "Initial traveler profile and later responses", "Recommendation being examined", "Comparison and reflection question", "Review scores"],
                   "Source": ["Fixed fictional scripts", "Fixed fictional scripts during research; editable in demos", "Prewritten advice", "One real Gemini API call", "Researcher using predefined criteria"]})
