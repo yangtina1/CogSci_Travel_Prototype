@@ -19,40 +19,41 @@ GEMINI_API_KEY = "your-key-here"
 
 5. Deploy and open the online URL. Keep the app private while developing and evaluating it.
 
-Create your key through Google AI Studio in a project eligible for the free tier. The configured model is `gemini-2.5-flash-lite`; availability and quota depend on the account. Keep paid billing disabled if you want free-only usage. The app makes one API call per comparison, caps output at 1,800 tokens, disables thinking, and does not retry automatically or switch to a paid model. Only fictional data should be entered.
+Create your key through Google AI Studio in a project eligible for the free tier. The configured model is `gemini-3.5-flash-lite`; availability and quota depend on the account. Keep paid billing disabled if you want free-only usage. The app makes one API call per comparison, caps output at 1,800 tokens, uses minimal thinking, and does not retry automatically or switch to a paid model. Only fictional data should be entered.
 
-Streamlit can run an entrypoint in a repository subfolder and find the dependency file beside it. Its documented configuration location is the repository-root `.streamlit/config.toml`; uploading the folder's contents at the repository root is the simplest way to preserve the supplied appearance and configuration. If you retain the enclosing folder, keep its config file in place for the study's file checks; the app's functional code uses paths relative to its own location. See [Streamlit file organization](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/file-organization).
+Streamlit can run an entrypoint in a repository subfolder and find the dependency file beside it. Its documented configuration location is the repository-root `.streamlit/config.toml`; uploading the folder's contents at the repository root is the simplest way to preserve the supplied appearance and configuration. If you retain the enclosing folder, keep its config file in place for consistent styling; the app's functional code uses paths relative to its own location. See [Streamlit file organization](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/file-organization).
 
-## What the app does
+## One interface, two data sets
 
-1. Show three fictional destinations and their evidence.
-2. Preserve an initial choice, confidence, priorities, requirements, and reasons.
-3. Reveal a prewritten recommendation.
-4. Use Gemini to compare the reasoning and advice with the evidence and generate one reflection question.
-5. Preserve subsequent reflection, retained or revised preferences, updated priorities, or a decision to defer.
+Use the normal app URL. The **Data set** selector switches between **Development** and **Final evaluation**. Older `?view=research` and `?view=setup` links now open the same interface. The sidebar shows only LLM status; model setup is in a collapsed section at the bottom.
 
-Destination descriptions, the recommendation, and traveler responses are scripted during research. Only the comparison and reflection question use the LLM. Without an LLM connection, the app shows an availability notice and disables comparison generation. It does not display a scripted comparison or reflection question.
+Both modes use the same three steps: preserve initial reasoning, reveal scripted AI advice and request a comparison, then optionally record a reflection and next decision. The visible default travel prompt keeps the budget-conscious student context fixed. Destination descriptions and advice are scripted; Gemini generates only the comparison and one reflection question. The advice disclosure stays visible. Findings name the destination and its role, and distinguish requirement conflicts, preference tradeoffs, unsupported claims, and uncertainty. Support applies to a particular finding, not to a destination overall.
 
-## Researcher access
+### Development and video demonstration
 
-The normal app URL opens the user workspace, with only LLM status in the sidebar. Research and setup controls are available separately by adding these endings to the app URL:
+Initial destination, confidence, priorities, requirements, and reasons are editable. Select a scenario, then **Start a new decision** to load it. Preserve your reasoning before revealing the advice. Later responses stay separate from the original reasoning and do not make another model call. Download a decision record before replacing an exploratory decision or refreshing the page. Edited inputs may conflict with the fixed advice; exposing that mismatch is part of the prototype.
 
-- `?view=research`: run cases, review outputs, freeze, and export.
-- `?view=setup`: model information and setup instructions.
+### Collect fixed cases, review, and freeze
 
-For example, use `https://your-app.streamlit.app/?view=research`. These are separate views, not password protection; retain the hosting platform's private sharing settings. “LLM configured” means a key is present, not that a request has been validated.
+1. In Development, expand **Evaluation records, review, and downloads** and choose **Start development run**. Leave **Use saved development run** checked.
+2. Choose a case and **Open selected case**. Keep its initial fields unchanged, preserve them, reveal advice, and generate the comparison. Repeat for all 12 cases. Order is selectable; each case is recorded only once. Reopening a collected case displays its saved result without another API call.
+3. Edits remain allowed, but an edited case is explicitly labeled exploratory and is excluded from the fixed run. Use **Open selected case** to reload its original inputs for collection. Turn off **Use saved development run** for independent demonstrations; the run remains saved.
+4. Download the run bundle regularly. When all attempts finish, enable **Show evaluation review and freeze tools**, select **Prepare review packet**, and complete all ratings, finding audits, and rationales. Preserve failed attempts. A run with failures cannot be frozen; resolve the problem and start a new development run with a documented reason.
+5. After all 12 successful cases are reviewed, mark readiness and choose **Freeze reviewed development version**. Download the frozen bundle. Any code, prompt, data, rubric or settings change requires a new development run and freeze.
 
-The user-facing “Reveal AI advice” action shows the fixed recommendation with a demo note. Actual comparison and reflection-question generation still require the live LLM. Subsequent responses remain tied to that initial comparison; they do not automatically trigger another call.
+### Final evaluation
 
-## Evaluation
+Select **Final evaluation**. It stays locked until a matching reviewed development freeze exists or is restored from a downloaded bundle. In **Evaluation records, review, and downloads**, confirm you downloaded that bundle, then **Start final evaluation**.
 
-Review the fictional scenarios, expected observations, and rubric yourself before beginning. They are proposed research materials, not authoritative judgments of how people should choose.
+Select a holdout case and **Open selected case**. The same initial fields appear prefilled and locked; the server uses the predefined values even if a browser sends different values. Preserve the initial record, reveal advice, and request one comparison per case. Follow-up fields remain editable, but responses are saved separately and excluded from claims about effectiveness. They do not change the evaluated input/output or invalidate existing reviews. All 12 attempts must finish before the review tools appear. Do not tune from holdout outputs and then report those cases as untouched tests.
 
-- **Development:** Use the 12 cases in `data/development` to identify problems and refine the comparison instructions or app. In Research console, collect outputs one case at a time and prepare the review packet. Rate fidelity to priorities and reasons, evidence handling, tradeoffs, and question quality. Record examples and reasons for any revisions in your research notes.
-- **Freeze:** After a complete successful development run and manual review, freeze the version. If you change the implementation or criteria during development, preserve the earlier run and collect a new development run under the revised version.
-- **Testing:** Run the 12 cases in `data/holdout` using the frozen version. Do not tune the tool against these outputs. Review with the same criteria and export the results.
+Each set has 12 cases, with initial choices and AI recommendations each balanced at four A, four B, and four C. Position corrections preserved facts and named choices and remapped all references. The holdout was reordered before evaluation, without using model outputs.
 
-Download the run bundle after each case or review session. Free cloud storage is not permanent; a downloaded bundle can be restored in the research console. Full procedures and failure handling are in [the evaluation protocol](docs/EVALUATION_PROTOCOL.md).
+### Downloads and recovery
+
+**Download this decision record** exports the current experience with its split and exploratory/evaluation label. **Download run bundle** preserves all collected attempts, raw model responses, optional follow-ups, review, and freeze. Restore a downloaded bundle in the same panel after a restart. Restoring does not repeat attempts. Version checks prevent mixing old results with updated files. Do not re-upload an old bundle to a changed app expecting it to qualify for the new version.
+
+Missing required files are reported by relative path. Preserve the folder structure, including the evaluation protocol and gold expectations. `.streamlit/config.toml` is optional when beginning a run; adding/removing it later changes the tracked version. No API key is written to exports. Keep the app's cloud sharing settings private during development and evaluation.
 
 ## Which prompt can be revised?
 
@@ -62,7 +63,7 @@ The case files contain the evidence and scripted reasoning/advice that the model
 
 ## Files
 
-- `streamlit_app.py`: interface and online research console.
+- `streamlit_app.py`: shared interface, evaluation collection, and review tools.
 - `metacog/`: workflow, Gemini connection, validation, review, and record handling.
 - `config/model.json`: model and generation settings.
 - `prompts/comparison.txt`: shared comparison instructions.
@@ -75,6 +76,6 @@ The case files contain the evidence and scripted reasoning/advice that the model
 
 ## Status and AI assistance
 
-This is a preparation-stage prototype. Live Gemini validation, online deployment, and the development/holdout evaluations have not yet been completed. No results are claimed.
+Two earlier user-provided live demonstrations informed revisions. No complete standardized study, holdout model evaluation, or human-subject experiment has been completed by the agent. Offline software tests do not establish model quality or human benefit.
 
-AI assistance was used to draft code, fictional scenarios, evaluation materials, and documentation. The researcher must review these materials, make and explain the substantive evaluation judgments, and develop the cognitive-science analysis. Update this acknowledgment to reflect actual use in the completed project.
+AI assistance contributed to code, fictional cases, evaluation materials, and documentation. The researcher must review these materials, make the substantive evaluation judgments, and develop the cognitive-science analysis. Update this acknowledgment to reflect actual use in the final submission.

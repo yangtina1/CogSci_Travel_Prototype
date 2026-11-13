@@ -11,13 +11,27 @@ from .provider import GenerationError, generate, settings
 
 
 def inventory():
+    required = ["evaluation/rubric.json", "docs/EVALUATION_PROTOCOL.md", "streamlit_app.py", "requirements.txt",
+                "prompts/comparison.txt", "schemas/comparison.json", "config/model.json"]
+    for split, prefix in (("development", "D"), ("holdout", "H")):
+        for number in range(1, 13):
+            required.extend(("data/%s/%s%02d.json" % (split, prefix, number),
+                             "evaluation/gold/%s/%s%02d.json" % (split, prefix, number)))
+    missing = [name for name in required if not (ROOT / name).is_file()]
+    require(not missing, "Missing required project files: " + ", ".join(missing)
+            + ". Upload them at these paths inside the folder containing streamlit_app.py.")
     paths = []
     for directory in ("metacog", "web", "prompts", "schemas", "config", "data", "evaluation/gold", "tests", "scripts"):
         paths.extend(p for p in (ROOT / directory).rglob("*") if p.is_file()
                      and "__pycache__" not in p.parts and p.suffix != ".pyc")
-    paths += [ROOT / name for name in ("evaluation/rubric.json", "docs/EVALUATION_PROTOCOL.md", "streamlit_app.py", "requirements.txt", ".streamlit/config.toml")]
+    paths += [ROOT / name for name in required]
+    # Streamlit can use its default theme when this hidden, optional file is absent.
+    # If present, track it so later addition/removal still invalidates a frozen run.
+    theme = ROOT / ".streamlit/config.toml"
+    if theme.is_file():
+        paths.append(theme)
     import hashlib
-    return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
+    return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(paths))}
 
 
 def validate_dataset():

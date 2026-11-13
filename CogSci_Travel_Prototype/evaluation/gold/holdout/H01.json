@@ -9,7 +9,7 @@
     {
       "id": "H01-E01",
       "category": "support",
-      "description": "A meets the cap and agrees with the initial museum preference.",
+      "description": "Rosehaven meets the cap and agrees with the initial museum preference.",
       "source_ids": [
         "A.1",
         "A.3",
@@ -20,7 +20,7 @@
     {
       "id": "H01-E02",
       "category": "tradeoff",
-      "description": "B offers a $25 saving but a different activity type.",
+      "description": "Salt Meadow offers a $25 saving but a different activity type.",
       "source_ids": [
         "A.1",
         "B.1",
@@ -30,14 +30,14 @@
     {
       "id": "H01-E03",
       "category": "question",
-      "description": "Check the basis of museum preference without treating B’s lower cost as decisive.",
+      "description": "Check the basis of museum preference without treating Salt Meadow’s lower cost as decisive.",
       "source_ids": [
         "initial.priorities",
         "initial.reasons"
       ]
     }
   ],
-  "question_target": "Check the basis of museum preference without treating B’s lower cost as decisive.",
+  "question_target": "Check the basis of museum preference without treating Salt Meadow’s lower cost as decisive.",
   "prohibited_inferences": [
     "Do not score the selected destination as correct or incorrect.",
     "Do not infer student behavior or cognitive improvement from scripted follow-ups."

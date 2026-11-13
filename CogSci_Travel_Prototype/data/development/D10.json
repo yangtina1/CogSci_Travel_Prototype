@@ -5,61 +5,61 @@
   "options": [
     {
       "id": "A",
-      "name": "North Lantern",
-      "facts": [
-        {
-          "id": "A.1",
-          "text": "Total cost is $330, all expenses included."
-        },
-        {
-          "id": "A.2",
-          "text": "Travel takes 2 hours."
-        },
-        {
-          "id": "A.3",
-          "text": "Has walking trails."
-        }
-      ]
-    },
-    {
-      "id": "B",
       "name": "Green Shoal",
       "facts": [
         {
-          "id": "B.1",
+          "id": "A.1",
           "text": "Total cost is $280, all expenses included."
         },
         {
-          "id": "B.2",
+          "id": "A.2",
           "text": "Travel takes 5 hours."
         },
         {
-          "id": "B.3",
+          "id": "A.3",
           "text": "Has coastal paths."
         }
       ]
     },
     {
-      "id": "C",
+      "id": "B",
       "name": "Mill Crossing",
       "facts": [
         {
-          "id": "C.1",
+          "id": "B.1",
           "text": "Total cost is $360, all expenses included."
         },
         {
-          "id": "C.2",
+          "id": "B.2",
           "text": "Travel takes 4 hours."
         },
         {
-          "id": "C.3",
+          "id": "B.3",
           "text": "Has a museum."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "North Lantern",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $330, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has walking trails."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "B",
+    "choice": "A",
     "confidence": 40,
     "priorities": [
       "Nature walks"
@@ -71,7 +71,7 @@
     "reasons": "Green Shoal is affordable but I am worried about the travel time."
   },
   "advice": {
-    "choice": "A",
+    "choice": "C",
     "text": "North Lantern is convenient, so it is the best available choice."
   },
   "followups": [

@@ -8,10 +8,10 @@
     {
       "id": "D11-E01",
       "category": "uncertainty",
-      "description": "A has contradictory total quotes straddling the cap; neither quote can be preferred from the evidence.",
+      "description": "Fox Hollow has contradictory total quotes straddling the cap; neither quote can be preferred from the evidence.",
       "source_ids": [
-        "A.1",
-        "A.2",
+        "B.1",
+        "B.2",
         "initial.constraints"
       ]
     },
@@ -20,7 +20,7 @@
       "category": "unsupported_claim",
       "description": "Advice presents definite affordability by ignoring the higher quote.",
       "source_ids": [
-        "A.2",
+        "B.2",
         "advice"
       ]
     },
@@ -29,8 +29,8 @@
       "category": "question",
       "description": "Ask how to resolve the conflicting totals before relying on affordability.",
       "source_ids": [
-        "A.1",
-        "A.2"
+        "B.1",
+        "B.2"
       ]
     }
   ],

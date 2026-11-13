@@ -9,22 +9,22 @@
     {
       "id": "H02-E01",
       "category": "tradeoff",
-      "description": "B costs $30 more and saves 3 hours each way; A’s outdoor preference remains reasonable.",
+      "description": "Wren Borough costs $30 more and saves 3 hours each way; Blue Orchard’s outdoor preference remains reasonable.",
       "source_ids": [
-        "A.1",
-        "A.2",
-        "A.3",
         "B.1",
         "B.2",
+        "B.3",
+        "A.1",
+        "A.2",
         "initial.priorities"
       ]
     },
     {
       "id": "H02-E02",
       "category": "support",
-      "description": "B equals the maximum and does not violate the cap.",
+      "description": "Wren Borough equals the maximum and does not violate the cap.",
       "source_ids": [
-        "B.1",
+        "A.1",
         "initial.constraints"
       ]
     },
@@ -34,8 +34,8 @@
       "description": "Ask about time savings versus the garden preference without assuming four hours is forbidden.",
       "source_ids": [
         "initial.reasons",
-        "A.2",
-        "B.2"
+        "B.2",
+        "A.2"
       ]
     }
   ],

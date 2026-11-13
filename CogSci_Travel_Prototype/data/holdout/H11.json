@@ -5,11 +5,11 @@
   "options": [
     {
       "id": "A",
-      "name": "Crane Hill",
+      "name": "Velvet Harbor",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total cost is $405, all expenses included."
+          "text": "Total cost is $370, all expenses included."
         },
         {
           "id": "A.2",
@@ -17,39 +17,39 @@
         },
         {
           "id": "A.3",
-          "text": "Step-free lodging entrance is documented."
-        }
-      ]
-    },
-    {
-      "id": "B",
-      "name": "Velvet Harbor",
-      "facts": [
-        {
-          "id": "B.1",
-          "text": "Total cost is $370, all expenses included."
-        },
-        {
-          "id": "B.2",
-          "text": "Travel takes 2 hours."
-        },
-        {
-          "id": "B.3",
           "text": "Lodging has stairs and explicitly no step-free entrance."
         }
       ]
     },
     {
-      "id": "C",
+      "id": "B",
       "name": "Citrine Glen",
       "facts": [
         {
-          "id": "C.1",
+          "id": "B.1",
           "text": "Total cost is $380, all expenses included."
         },
         {
-          "id": "C.2",
+          "id": "B.2",
           "text": "Travel takes 5 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Step-free lodging entrance is documented."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Crane Hill",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $405, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "C.3",
@@ -59,7 +59,7 @@
     }
   ],
   "initial": {
-    "choice": "C",
+    "choice": "B",
     "confidence": 45,
     "priorities": [
       "A quiet break"
@@ -72,7 +72,7 @@
     "reasons": "Citrine Glen fits price and access but is far away."
   },
   "advice": {
-    "choice": "A",
+    "choice": "C",
     "text": "Crane Hill is convenient and accessible; you should simply spend the extra $15."
   },
   "followups": [

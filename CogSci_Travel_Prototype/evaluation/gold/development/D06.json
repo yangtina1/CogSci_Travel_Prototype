@@ -9,7 +9,7 @@
     {
       "id": "D06-E01",
       "category": "unsupported_claim",
-      "description": "A Wi-Fi claim is unsupported; it is not evidence that Wi-Fi is absent.",
+      "description": "The advice's claim about Canal Bend's Wi-Fi is unsupported; missing evidence does not establish that Wi-Fi is absent.",
       "source_ids": [
         "A.3",
         "advice"
@@ -18,9 +18,9 @@
     {
       "id": "D06-E02",
       "category": "support",
-      "description": "B explicitly meets the Wi-Fi requirement.",
+      "description": "Birch City explicitly meets the Wi-Fi requirement.",
       "source_ids": [
-        "B.3",
+        "C.3",
         "initial.constraints"
       ]
     },

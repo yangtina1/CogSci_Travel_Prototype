@@ -9,7 +9,7 @@
     {
       "id": "H05-E01",
       "category": "constraint_conflict",
-      "description": "A’s stairs with no alternative violate the step-free requirement.",
+      "description": "Mica Village’s stairs with no alternative violate the step-free requirement.",
       "source_ids": [
         "A.3",
         "initial.constraints"
@@ -18,7 +18,7 @@
     {
       "id": "H05-E02",
       "category": "uncertainty",
-      "description": "C access is unknown, not confirmed inaccessible or accessible.",
+      "description": "Bramble Lake access is unknown, not confirmed inaccessible or accessible.",
       "source_ids": [
         "C.3",
         "initial.constraints"

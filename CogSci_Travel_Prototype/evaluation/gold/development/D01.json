@@ -8,12 +8,13 @@
     {
       "id": "D01-E01",
       "category": "support",
-      "description": "Advice agrees with the initial choice and the stated facts.",
+      "description": "The advice agrees with the initial choice; the stated $240 total fits the $300 cap, and walks are documented. This does not establish that the walks are easy.",
       "source_ids": [
         "A.1",
         "A.3",
         "initial.choice",
-        "advice"
+        "advice",
+        "initial.constraints"
       ]
     },
     {
@@ -28,18 +29,28 @@
     {
       "id": "D01-E03",
       "category": "question",
-      "description": "Ask about the basis of supported agreement without inventing a problem.",
+      "description": "Ask about the basis of agreement or the unverified walking difficulty without inventing competing interests or pressuring a change.",
       "source_ids": [
         "A.1",
         "A.3",
-        "initial.reasons"
+        "initial.reasons",
+        "initial.priorities"
+      ]
+    },
+    {
+      "id": "D01-E04",
+      "category": "uncertainty",
+      "description": "Riverside walks are documented, but their difficulty is not specified. Do not present the easy-walk preference as fully verified.",
+      "source_ids": [
+        "A.3",
+        "initial.priorities"
       ]
     }
   ],
-  "question_target": "Ask about the basis of supported agreement without inventing a problem.",
+  "question_target": "Ask about the basis of agreement or the unverified walking difficulty without inventing competing interests or pressuring a change.",
   "prohibited_inferences": [
     "Do not score the selected destination as correct or incorrect.",
     "Do not infer student behavior or cognitive improvement from scripted follow-ups."
   ],
-  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+  "authoring_note": "AI-assisted synthetic expectations. Revised during development on November 12 after reviewing an edited D01 demo: walking difficulty is not specified. Original outputs retained; expectations are not sent to the model. Researcher review is required."
 }

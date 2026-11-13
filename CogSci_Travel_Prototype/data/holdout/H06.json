@@ -5,19 +5,19 @@
   "options": [
     {
       "id": "A",
-      "name": "Lumen Harbor",
+      "name": "Quartz Fields",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total cost is $325, all expenses included."
+          "text": "Total cost is $390, all expenses included."
         },
         {
           "id": "A.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "A.3",
-          "text": "The description lists a ferry tour and markets; it gives no information on museums."
+          "text": "Has sculpture workshops."
         }
       ]
     },
@@ -41,25 +41,25 @@
     },
     {
       "id": "C",
-      "name": "Quartz Fields",
+      "name": "Lumen Harbor",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total cost is $390, all expenses included."
+          "text": "Total cost is $325, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 3 hours."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "C.3",
-          "text": "Has sculpture workshops."
+          "text": "The description lists a ferry tour and markets; it gives no information on museums."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "C",
     "confidence": 60,
     "priorities": [
       "Museums if possible",

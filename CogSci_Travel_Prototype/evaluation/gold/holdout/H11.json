@@ -9,11 +9,11 @@
     {
       "id": "H11-E01",
       "category": "constraint_conflict",
-      "description": "A exceeds cost, B fails access, and C exceeds travel time; none meets all firm requirements.",
+      "description": "Crane Hill exceeds cost, Velvet Harbor fails access, and Citrine Glen exceeds travel time; none meets all firm requirements.",
       "source_ids": [
-        "A.1",
-        "B.3",
-        "C.2",
+        "C.1",
+        "A.3",
+        "B.2",
         "initial.constraints"
       ]
     },
@@ -31,9 +31,9 @@
       "category": "question",
       "description": "Support deciding what to investigate next without forcing a known violation.",
       "source_ids": [
-        "A.1",
-        "B.3",
-        "C.2",
+        "C.1",
+        "A.3",
+        "B.2",
         "initial.constraints"
       ]
     }

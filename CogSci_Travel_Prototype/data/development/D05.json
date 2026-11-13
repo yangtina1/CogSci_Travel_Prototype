@@ -5,11 +5,11 @@
   "options": [
     {
       "id": "A",
-      "name": "Juniper Point",
+      "name": "Amber Fields",
       "facts": [
         {
           "id": "A.1",
-          "text": "Lodging and transport subtotal is $210; meal and activity costs are not supplied."
+          "text": "Total trip cost is $340, all expenses included."
         },
         {
           "id": "A.2",
@@ -17,49 +17,49 @@
         },
         {
           "id": "A.3",
-          "text": "Beach access is available."
+          "text": "Garden walks are available."
         }
       ]
     },
     {
       "id": "B",
-      "name": "Stonebrook",
+      "name": "Juniper Point",
       "facts": [
         {
           "id": "B.1",
-          "text": "Total trip cost is $295, all expenses included."
+          "text": "Lodging and transport subtotal is $210; meal and activity costs are not supplied."
         },
         {
           "id": "B.2",
-          "text": "Travel takes 3 hours."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "B.3",
-          "text": "Has a lake beach."
+          "text": "Beach access is available."
         }
       ]
     },
     {
       "id": "C",
-      "name": "Amber Fields",
+      "name": "Stonebrook",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total trip cost is $340, all expenses included."
+          "text": "Total trip cost is $295, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "C.3",
-          "text": "Garden walks are available."
+          "text": "Has a lake beach."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "B",
     "confidence": 80,
     "priorities": [
       "Beach time",
@@ -71,7 +71,7 @@
     "reasons": "Juniper Point is only $210 so I am sure it fits."
   },
   "advice": {
-    "choice": "A",
+    "choice": "B",
     "text": "Juniper Point costs only $210 in total and is safely within budget."
   },
   "followups": [

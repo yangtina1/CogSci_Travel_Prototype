@@ -9,7 +9,7 @@
     {
       "id": "H07-E01",
       "category": "unsupported_claim",
-      "description": "Higher price is not evidence for A’s internet quality.",
+      "description": "Higher price is not evidence for Topaz Ridge’s internet quality.",
       "source_ids": [
         "A.1",
         "A.3",
@@ -19,7 +19,7 @@
     {
       "id": "H07-E02",
       "category": "support",
-      "description": "B provides stated video-call suitability; this is supplied evidence, not a real-world guarantee.",
+      "description": "Acorn Wharf provides stated video-call suitability; this is supplied evidence, not a real-world guarantee.",
       "source_ids": [
         "B.3",
         "initial.constraints",

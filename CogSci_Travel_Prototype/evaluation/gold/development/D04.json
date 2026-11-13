@@ -8,7 +8,7 @@
     {
       "id": "D04-E01",
       "category": "constraint_conflict",
-      "description": "B violates the 3-hour limit even though it is cheaper.",
+      "description": "Moss Plateau violates the 3-hour limit even though it is cheaper.",
       "source_ids": [
         "B.2",
         "initial.constraints"
@@ -17,7 +17,7 @@
     {
       "id": "D04-E02",
       "category": "support",
-      "description": "A meets both the cost and travel limits.",
+      "description": "Elm Harbor meets both the cost and travel limits.",
       "source_ids": [
         "A.1",
         "A.2",

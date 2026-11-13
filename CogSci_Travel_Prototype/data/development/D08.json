@@ -5,11 +5,11 @@
   "options": [
     {
       "id": "A",
-      "name": "Silver Glen",
+      "name": "Hollow Lake",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total cost is $280, all expenses included."
+          "text": "Total cost is $320, all expenses included."
         },
         {
           "id": "A.2",
@@ -17,49 +17,49 @@
         },
         {
           "id": "A.3",
-          "text": "Includes a guided art workshop."
+          "text": "Has nature walks."
         }
       ]
     },
     {
       "id": "B",
-      "name": "Clayford",
+      "name": "Silver Glen",
       "facts": [
         {
           "id": "B.1",
-          "text": "Total cost is $230, all expenses included."
+          "text": "Total cost is $280, all expenses included."
         },
         {
           "id": "B.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "B.3",
-          "text": "Has a free gallery but no workshops."
+          "text": "Includes a guided art workshop."
         }
       ]
     },
     {
       "id": "C",
-      "name": "Hollow Lake",
+      "name": "Clayford",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total cost is $320, all expenses included."
+          "text": "Total cost is $230, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 3 hours."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "C.3",
-          "text": "Has nature walks."
+          "text": "Has a free gallery but no workshops."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "B",
     "confidence": 65,
     "priorities": [
       "Prefer to spend around $250, but can pay more for an art workshop",
@@ -71,13 +71,13 @@
     "reasons": "The workshop is worth the extra $30 above my preferred amount."
   },
   "advice": {
-    "choice": "B",
+    "choice": "C",
     "text": "Clayford is under your preferred $250 and has a gallery."
   },
   "followups": [
     {
       "action": "retain",
-      "choice": "A",
+      "choice": "B",
       "confidence": 65,
       "priorities": [
         "Prefer to spend around $250, but can pay more for an art workshop",

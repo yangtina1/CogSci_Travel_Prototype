@@ -5,61 +5,61 @@
   "options": [
     {
       "id": "A",
-      "name": "Willow Cove",
+      "name": "Fern Crossing",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total trip cost is $280, all expenses included."
+          "text": "Total trip cost is $330, all expenses included."
         },
         {
           "id": "A.2",
-          "text": "Travel takes 3 hours."
+          "text": "Travel takes 4 hours."
         },
         {
           "id": "A.3",
-          "text": "Has a quiet beach; no museums are offered."
+          "text": "Has wooded walking trails."
         }
       ]
     },
     {
       "id": "B",
-      "name": "Brickhaven",
+      "name": "Willow Cove",
       "facts": [
         {
           "id": "B.1",
-          "text": "Total trip cost is $260, all expenses included."
+          "text": "Total trip cost is $280, all expenses included."
         },
         {
           "id": "B.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "B.3",
-          "text": "Has two museums; no beach is available."
+          "text": "Has a quiet beach; no museums are offered."
         }
       ]
     },
     {
       "id": "C",
-      "name": "Fern Crossing",
+      "name": "Brickhaven",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total trip cost is $330, all expenses included."
+          "text": "Total trip cost is $260, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 4 hours."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "C.3",
-          "text": "Has wooded walking trails."
+          "text": "Has two museums; no beach is available."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "B",
     "confidence": 65,
     "priorities": [
       "Beach relaxation matters more to me than museums",
@@ -71,13 +71,13 @@
     "reasons": "I prefer a beach even though Brickhaven costs less."
   },
   "advice": {
-    "choice": "B",
+    "choice": "C",
     "text": "Brickhaven is $20 cheaper and has museums, so I recommend it."
   },
   "followups": [
     {
       "action": "retain",
-      "choice": "A",
+      "choice": "B",
       "confidence": 65,
       "priorities": [
         "Beach relaxation matters more to me than museums",

@@ -9,12 +9,12 @@
     {
       "id": "D10-E01",
       "category": "constraint_conflict",
-      "description": "A exceeds the cap, B exceeds the time limit, and C exceeds both.",
+      "description": "North Lantern exceeds the cap, Green Shoal exceeds the time limit, and Mill Crossing exceeds both.",
       "source_ids": [
-        "A.1",
-        "B.2",
         "C.1",
-        "C.2",
+        "A.2",
+        "B.1",
+        "B.2",
         "initial.constraints"
       ]
     },
@@ -32,10 +32,10 @@
       "category": "question",
       "description": "Ask what information or additional options would be needed when no supplied option meets both requirements.",
       "source_ids": [
-        "A.1",
-        "B.2",
         "C.1",
-        "C.2",
+        "A.2",
+        "B.1",
+        "B.2",
         "initial.constraints"
       ]
     }

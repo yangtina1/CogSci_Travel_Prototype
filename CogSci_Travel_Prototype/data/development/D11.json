@@ -5,61 +5,61 @@
   "options": [
     {
       "id": "A",
-      "name": "Fox Hollow",
+      "name": "Hazel Grove",
       "facts": [
         {
           "id": "A.1",
-          "text": "A package brochure states total cost is $270 including all expenses."
+          "text": "Total cost is $315, all expenses included."
         },
         {
           "id": "A.2",
-          "text": "A booking summary states total cost is $340 including all expenses; neither source is identified as newer."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "A.3",
-          "text": "Travel takes 2 hours; walking trails are available."
+          "text": "Has garden paths."
         }
       ]
     },
     {
       "id": "B",
-      "name": "Cloud Harbor",
+      "name": "Fox Hollow",
       "facts": [
         {
           "id": "B.1",
-          "text": "Total cost is $295, all expenses included."
+          "text": "A package brochure states total cost is $270 including all expenses."
         },
         {
           "id": "B.2",
-          "text": "Travel takes 3 hours."
+          "text": "A booking summary states total cost is $340 including all expenses; neither source is identified as newer."
         },
         {
           "id": "B.3",
-          "text": "Has waterfront walks."
+          "text": "Travel takes 2 hours; walking trails are available."
         }
       ]
     },
     {
       "id": "C",
-      "name": "Hazel Grove",
+      "name": "Cloud Harbor",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total cost is $315, all expenses included."
+          "text": "Total cost is $295, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "C.3",
-          "text": "Has garden paths."
+          "text": "Has waterfront walks."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "B",
     "confidence": 55,
     "priorities": [
       "Low cost",
@@ -71,7 +71,7 @@
     "reasons": "Fox Hollow may be affordable, but I noticed two prices."
   },
   "advice": {
-    "choice": "A",
+    "choice": "B",
     "text": "Fox Hollow costs $270 and therefore meets your limit."
   },
   "followups": [

@@ -5,23 +5,19 @@
   "options": [
     {
       "id": "A",
-      "name": "Hearth Cove",
+      "name": "Laurel Port",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total cost is $355, all expenses included."
+          "text": "Total cost is $385, all expenses included."
         },
         {
           "id": "A.2",
-          "text": "A bus listing gives a 2-hour one-way trip."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "A.3",
-          "text": "A route notice gives a 4.5-hour one-way trip; neither item has a date or precedence rule."
-        },
-        {
-          "id": "A.4",
-          "text": "Has beach walks."
+          "text": "Has waterfront trails."
         }
       ]
     },
@@ -45,25 +41,29 @@
     },
     {
       "id": "C",
-      "name": "Laurel Port",
+      "name": "Hearth Cove",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total cost is $385, all expenses included."
+          "text": "Total cost is $355, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 3 hours."
+          "text": "A bus listing gives a 2-hour one-way trip."
         },
         {
           "id": "C.3",
-          "text": "Has waterfront trails."
+          "text": "A route notice gives a 4.5-hour one-way trip; neither item has a date or precedence rule."
+        },
+        {
+          "id": "C.4",
+          "text": "Has beach walks."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "C",
     "confidence": 55,
     "priorities": [
       "Beach walks",
@@ -76,7 +76,7 @@
     "reasons": "Hearth Cove looks good if the two-hour time is accurate."
   },
   "advice": {
-    "choice": "A",
+    "choice": "C",
     "text": "Hearth Cove is only two hours away and meets your travel limit."
   },
   "followups": [

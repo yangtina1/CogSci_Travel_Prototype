@@ -5,47 +5,47 @@
   "options": [
     {
       "id": "A",
-      "name": "Lake Lantern",
-      "facts": [
-        {
-          "id": "A.1",
-          "text": "Total cost is $290, all expenses included."
-        },
-        {
-          "id": "A.2",
-          "text": "Travel takes 2 hours."
-        },
-        {
-          "id": "A.3",
-          "text": "Lakeside paths and basic camping are available."
-        }
-      ]
-    },
-    {
-      "id": "B",
       "name": "Summit Vale",
       "facts": [
         {
-          "id": "B.1",
+          "id": "A.1",
           "text": "Total cost is $460, all expenses included."
         },
         {
-          "id": "B.2",
+          "id": "A.2",
           "text": "Travel takes 3 hours."
         },
         {
-          "id": "B.3",
+          "id": "A.3",
           "text": "Guided hikes and a cabin are available."
         }
       ]
     },
     {
-      "id": "C",
+      "id": "B",
       "name": "Orchard Town",
       "facts": [
         {
-          "id": "C.1",
+          "id": "B.1",
           "text": "Total cost is $310, all expenses included."
+        },
+        {
+          "id": "B.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "B.3",
+          "text": "Garden tours are available."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Lake Lantern",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $290, all expenses included."
         },
         {
           "id": "C.2",
@@ -53,13 +53,13 @@
         },
         {
           "id": "C.3",
-          "text": "Garden tours are available."
+          "text": "Lakeside paths and basic camping are available."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "C",
     "confidence": 70,
     "priorities": [
       "Hiking",
@@ -71,7 +71,7 @@
     "reasons": "Lake Lantern seems manageable financially."
   },
   "advice": {
-    "choice": "B",
+    "choice": "A",
     "text": "Summit Vale offers the best hiking and is within your $350 budget at $460."
   },
   "followups": [

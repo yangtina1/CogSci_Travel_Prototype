@@ -5,61 +5,61 @@
   "options": [
     {
       "id": "A",
-      "name": "Ashwater",
-      "facts": [
-        {
-          "id": "A.1",
-          "text": "Total cost is exactly $300, all expenses included."
-        },
-        {
-          "id": "A.2",
-          "text": "Travel takes exactly 3 hours."
-        },
-        {
-          "id": "A.3",
-          "text": "Has a sculpture park."
-        }
-      ]
-    },
-    {
-      "id": "B",
       "name": "Brookfen",
       "facts": [
         {
-          "id": "B.1",
+          "id": "A.1",
           "text": "Total cost is $285, all expenses included."
         },
         {
-          "id": "B.2",
+          "id": "A.2",
           "text": "Travel takes 2 hours."
         },
         {
-          "id": "B.3",
+          "id": "A.3",
           "text": "Has a lake but no art activities."
         }
       ]
     },
     {
-      "id": "C",
+      "id": "B",
       "name": "Coral Hill",
       "facts": [
         {
-          "id": "C.1",
+          "id": "B.1",
           "text": "Total cost is $340, all expenses included."
         },
         {
-          "id": "C.2",
+          "id": "B.2",
           "text": "Travel takes 4 hours."
         },
         {
-          "id": "C.3",
+          "id": "B.3",
           "text": "Has art classes."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Ashwater",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is exactly $300, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes exactly 3 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has a sculpture park."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "C",
     "confidence": 70,
     "priorities": [
       "Art activities",
@@ -72,13 +72,13 @@
     "reasons": "Ashwater meets my limits and offers art."
   },
   "advice": {
-    "choice": "A",
+    "choice": "C",
     "text": "Ashwater exactly meets your cost and travel maxima and offers a sculpture park."
   },
   "followups": [
     {
       "action": "retain",
-      "choice": "A",
+      "choice": "C",
       "confidence": 70,
       "priorities": [
         "Art activities",

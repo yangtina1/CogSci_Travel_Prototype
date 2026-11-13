@@ -9,9 +9,9 @@
     {
       "id": "H03-E01",
       "category": "uncertainty",
-      "description": "A may meet or exceed $380; a range crossing the cap is unresolved.",
+      "description": "Granite Shore may meet or exceed $380; a range crossing the cap is unresolved.",
       "source_ids": [
-        "A.1",
+        "C.1",
         "initial.constraints"
       ]
     },
@@ -20,7 +20,7 @@
       "category": "unsupported_claim",
       "description": "A guarantee of affordability is unsupported by the lower endpoint.",
       "source_ids": [
-        "A.1",
+        "C.1",
         "advice"
       ]
     },
@@ -29,7 +29,7 @@
       "category": "question",
       "description": "Ask what final price is needed before accepting the affordability claim.",
       "source_ids": [
-        "A.1",
+        "C.1",
         "initial.constraints"
       ]
     }

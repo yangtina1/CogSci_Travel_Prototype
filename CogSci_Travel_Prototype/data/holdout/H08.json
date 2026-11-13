@@ -5,37 +5,37 @@
   "options": [
     {
       "id": "A",
-      "name": "Oriel Bay",
+      "name": "Tamarind Town",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total cost is $335, all expenses included."
+          "text": "Total cost is $360, all expenses included."
         },
         {
           "id": "A.2",
-          "text": "Travel takes 3 hours."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "A.3",
-          "text": "Has a beach and a small gallery."
+          "text": "Has a large art museum and no beach."
         }
       ]
     },
     {
       "id": "B",
-      "name": "Tamarind Town",
+      "name": "Oriel Bay",
       "facts": [
         {
           "id": "B.1",
-          "text": "Total cost is $360, all expenses included."
+          "text": "Total cost is $335, all expenses included."
         },
         {
           "id": "B.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "B.3",
-          "text": "Has a large art museum and no beach."
+          "text": "Has a beach and a small gallery."
         }
       ]
     },
@@ -59,7 +59,7 @@
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "B",
     "confidence": 65,
     "priorities": [
       "Beach first, then art",
@@ -71,13 +71,13 @@
     "reasons": "Oriel Bay gives me a beach and some art at a manageable price."
   },
   "advice": {
-    "choice": "B",
+    "choice": "A",
     "text": "Tamarind Town provides more extensive art exhibits for $25 more."
   },
   "followups": [
     {
       "action": "retain",
-      "choice": "A",
+      "choice": "B",
       "confidence": 65,
       "priorities": [
         "Art first, then beach",

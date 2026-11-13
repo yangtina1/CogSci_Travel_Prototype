@@ -5,37 +5,37 @@
   "options": [
     {
       "id": "A",
-      "name": "Jade Hollow",
+      "name": "Copper Marsh",
       "facts": [
         {
           "id": "A.1",
-          "text": "Package costs $720 for exactly two travelers sharing; individual bookings cost $460 per traveler. Both rates include all expenses."
+          "text": "Total individual trip cost is $395, all expenses included."
         },
         {
           "id": "A.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "A.3",
-          "text": "Has a lake and walking paths."
+          "text": "Has boardwalk trails."
         }
       ]
     },
     {
       "id": "B",
-      "name": "Copper Marsh",
+      "name": "Jade Hollow",
       "facts": [
         {
           "id": "B.1",
-          "text": "Total individual trip cost is $395, all expenses included."
+          "text": "Package costs $720 for exactly two travelers sharing; individual bookings cost $460 per traveler. Both rates include all expenses."
         },
         {
           "id": "B.2",
-          "text": "Travel takes 3 hours."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "B.3",
-          "text": "Has boardwalk trails."
+          "text": "Has a lake and walking paths."
         }
       ]
     },
@@ -59,7 +59,7 @@
     }
   ],
   "initial": {
-    "choice": "B",
+    "choice": "A",
     "confidence": 70,
     "priorities": [
       "Nature walks",
@@ -72,13 +72,13 @@
     "reasons": "Copper Marsh fits the solo cost limit."
   },
   "advice": {
-    "choice": "A",
+    "choice": "B",
     "text": "Split the $720 package in half: Jade Hollow is $360 each and fits your budget."
   },
   "followups": [
     {
       "action": "retain",
-      "choice": "B",
+      "choice": "A",
       "confidence": 70,
       "priorities": [
         "Nature walks",

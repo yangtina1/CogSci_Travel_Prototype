@@ -5,19 +5,19 @@
   "options": [
     {
       "id": "A",
-      "name": "Indigo Reach",
+      "name": "Wheatstone Cove",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total cost is $345, all expenses included."
+          "text": "Total cost is $375, all expenses included."
         },
         {
           "id": "A.2",
-          "text": "Travel takes 2.5 hours."
+          "text": "Travel takes 3 hours."
         },
         {
           "id": "A.3",
-          "text": "Has a public beach."
+          "text": "Has beach access and a guided boat tour."
         }
       ]
     },
@@ -41,25 +41,25 @@
     },
     {
       "id": "C",
-      "name": "Wheatstone Cove",
+      "name": "Indigo Reach",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total cost is $375, all expenses included."
+          "text": "Total cost is $345, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 3 hours."
+          "text": "Travel takes 2.5 hours."
         },
         {
           "id": "C.3",
-          "text": "Has beach access and a guided boat tour."
+          "text": "Has a public beach."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "C",
     "confidence": 75,
     "priorities": [
       "Beach access",
@@ -71,13 +71,13 @@
     "reasons": "Indigo Reach is worth $25 over my preferred amount because of the beach."
   },
   "advice": {
-    "choice": "A",
+    "choice": "C",
     "text": "Indigo Reach is the cheapest destination and matches your beach preference."
   },
   "followups": [
     {
       "action": "retain",
-      "choice": "A",
+      "choice": "C",
       "confidence": 75,
       "priorities": [
         "Beach access",

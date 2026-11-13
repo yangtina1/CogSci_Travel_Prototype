@@ -5,11 +5,11 @@
   "options": [
     {
       "id": "A",
-      "name": "Granite Shore",
+      "name": "Saffron Bluff",
       "facts": [
         {
           "id": "A.1",
-          "text": "Estimated total cost ranges from $330 to $410; the final lodging rate is unresolved."
+          "text": "Total cost is $420, all expenses included."
         },
         {
           "id": "A.2",
@@ -17,7 +17,7 @@
         },
         {
           "id": "A.3",
-          "text": "Has a public beach."
+          "text": "Has coastal hikes."
         }
       ]
     },
@@ -41,11 +41,11 @@
     },
     {
       "id": "C",
-      "name": "Saffron Bluff",
+      "name": "Granite Shore",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total cost is $420, all expenses included."
+          "text": "Estimated total cost ranges from $330 to $410; the final lodging rate is unresolved."
         },
         {
           "id": "C.2",
@@ -53,13 +53,13 @@
         },
         {
           "id": "C.3",
-          "text": "Has coastal hikes."
+          "text": "Has a public beach."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "C",
     "confidence": 65,
     "priorities": [
       "Beach time",
@@ -71,7 +71,7 @@
     "reasons": "Granite Shore could be cheapest but I do not know the final rate."
   },
   "advice": {
-    "choice": "A",
+    "choice": "C",
     "text": "Granite Shore starts at $330, so it is guaranteed to fit your $380 limit."
   },
   "followups": [

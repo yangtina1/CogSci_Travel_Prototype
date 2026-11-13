@@ -23,43 +23,43 @@
     },
     {
       "id": "B",
-      "name": "Birch City",
+      "name": "Dune Village",
       "facts": [
         {
           "id": "B.1",
-          "text": "Total trip cost is $280, all expenses included."
+          "text": "Total trip cost is $290, all expenses included."
         },
         {
           "id": "B.2",
-          "text": "Travel takes 2 hours."
+          "text": "Travel takes 4 hours."
         },
         {
           "id": "B.3",
-          "text": "Lodging provides verified Wi-Fi and nearby museums."
+          "text": "Beach walks are available; lodging has no internet service."
         }
       ]
     },
     {
       "id": "C",
-      "name": "Dune Village",
+      "name": "Birch City",
       "facts": [
         {
           "id": "C.1",
-          "text": "Total trip cost is $290, all expenses included."
+          "text": "Total trip cost is $280, all expenses included."
         },
         {
           "id": "C.2",
-          "text": "Travel takes 4 hours."
+          "text": "Travel takes 2 hours."
         },
         {
           "id": "C.3",
-          "text": "Beach walks are available; lodging has no internet service."
+          "text": "Lodging provides verified Wi-Fi and nearby museums."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "B",
+    "choice": "C",
     "confidence": 60,
     "priorities": [
       "Kayaking if possible",

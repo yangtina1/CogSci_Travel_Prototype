@@ -5,11 +5,11 @@
   "options": [
     {
       "id": "A",
-      "name": "Starling Park",
+      "name": "Fable Town",
       "facts": [
         {
           "id": "A.1",
-          "text": "Total cost is $220, all expenses included."
+          "text": "Total cost is $275, all expenses included."
         },
         {
           "id": "A.2",
@@ -17,49 +17,49 @@
         },
         {
           "id": "A.3",
-          "text": "Has free outdoor trails; indoor activities are unavailable."
-        }
-      ]
-    },
-    {
-      "id": "B",
-      "name": "Fable Town",
-      "facts": [
-        {
-          "id": "B.1",
-          "text": "Total cost is $275, all expenses included."
-        },
-        {
-          "id": "B.2",
-          "text": "Travel takes 2 hours."
-        },
-        {
-          "id": "B.3",
           "text": "Has indoor exhibits and a covered market."
         }
       ]
     },
     {
-      "id": "C",
+      "id": "B",
       "name": "Sunstone Bay",
       "facts": [
         {
-          "id": "C.1",
+          "id": "B.1",
           "text": "Total cost is $310, all expenses included."
         },
         {
-          "id": "C.2",
+          "id": "B.2",
           "text": "Travel takes 3 hours."
         },
         {
-          "id": "C.3",
+          "id": "B.3",
           "text": "Has beaches and outdoor tours."
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Starling Park",
+      "facts": [
+        {
+          "id": "C.1",
+          "text": "Total cost is $220, all expenses included."
+        },
+        {
+          "id": "C.2",
+          "text": "Travel takes 2 hours."
+        },
+        {
+          "id": "C.3",
+          "text": "Has free outdoor trails; indoor activities are unavailable."
         }
       ]
     }
   ],
   "initial": {
-    "choice": "A",
+    "choice": "C",
     "confidence": 70,
     "priorities": [
       "Outdoor walks",
@@ -71,13 +71,13 @@
     "reasons": "Starling Park is inexpensive and supports my outdoor plans."
   },
   "advice": {
-    "choice": "B",
+    "choice": "A",
     "text": "Fable Town offers indoor activities for $275, although it costs more."
   },
   "followups": [
     {
       "action": "revise",
-      "choice": "B",
+      "choice": "A",
       "confidence": 60,
       "priorities": [
         "Indoor activities",

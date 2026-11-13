@@ -16,29 +16,43 @@
     {
       "id": "D09-E02",
       "category": "tradeoff",
-      "description": "A is $55 cheaper with outdoor trails; B has indoor options and is still within the cap.",
+      "description": "Starling Park is $55 cheaper with outdoor trails; Fable Town has indoor options and is still within the cap.",
       "source_ids": [
+        "C.1",
+        "C.3",
         "A.1",
         "A.3",
-        "B.1",
-        "B.3",
         "initial.constraints"
       ]
     },
     {
       "id": "D09-E03",
       "category": "question",
-      "description": "Ask whether indoor activities matter enough to reconsider the current outdoor priority without predicting a change.",
+      "description": "Ask how, if at all, the indoor activities relate to the stated priorities; do not presume a preference for indoors, weather protection, or a future change.",
       "source_ids": [
         "initial.priorities",
-        "B.3"
+        "A.3"
+      ]
+    },
+    {
+      "id": "D09-E04",
+      "category": "priority_fidelity",
+      "description": "The advice about Fable Town is factually supported and fits the cap, but does not explain its fit with outdoor walks or justify paying $55 more given the current priorities. This is not a firm violation; outdoor availability at Fable Town is unspecified.",
+      "source_ids": [
+        "advice",
+        "A.1",
+        "A.3",
+        "C.1",
+        "C.3",
+        "initial.priorities",
+        "initial.constraints"
       ]
     }
   ],
-  "question_target": "Ask whether indoor activities matter enough to reconsider the current outdoor priority without predicting a change.",
+  "question_target": "Ask how, if at all, the indoor activities relate to the stated priorities; do not presume a preference for indoors, weather protection, or a future change.",
   "prohibited_inferences": [
     "Do not score the selected destination as correct or incorrect.",
     "Do not infer student behavior or cognitive improvement from scripted follow-ups."
   ],
-  "authoring_note": "AI-assisted synthetic case and rubric authored before live runs. Researcher review is required. Gold expectations are not sent to the comparison model."
+  "authoring_note": "AI-assisted synthetic expectations. Revised during development on November 12 after reviewing a D09 demo: distinguish advice accuracy from preference fit and avoid presupposing an interest in indoor activities. Original outputs retained; expectations are not sent to the model. Researcher review is required."
 }

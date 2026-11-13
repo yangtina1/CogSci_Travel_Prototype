@@ -8,9 +8,9 @@ from pathlib import Path
 
 import streamlit as st
 
-from metacog.cloud import bundle_bytes, new_run, restore_bundle, run_next
+from metacog.cloud import bundle_bytes, new_run, restore_bundle, run_case, saved_flow, save_followup
 from metacog.core import ROOT, Workflow, case_paths, load_case, model_input, now, read_json, source_catalog, write_json
-from metacog.evaluation import freeze, prepare_review, summarize, verify_manifest
+from metacog.evaluation import freeze, inventory, prepare_review, summarize, verify_manifest
 from metacog.provider import GenerationError, comparison_error_message, generate, settings
 
 st.set_page_config(page_title="Pause & Compare · Student Travel", page_icon="🧭", layout="wide")
@@ -81,10 +81,24 @@ def comparison_view(comparison, payload):
         safe_text(comparison["priorities_interpretation"])
         st.write("**Reasons**")
         safe_text(comparison["reasoning_interpretation"])
-    labels = {"support": "Supporting evidence", "constraint_conflict": "Firm requirement conflict",
+    labels = {"support": "Evidence supporting this finding", "constraint_conflict": "Firm requirement conflict",
               "tradeoff": "Flexible tradeoff", "unsupported_claim": "Unsupported claim", "uncertainty": "Unresolved information"}
+    names = {option["id"]: option["name"] for option in payload["options"]}
+    st.caption("Each finding concerns the named destinations and the specific claim below; it is not an overall endorsement of a choice.")
     for item in comparison["findings"]:
         with st.container(border=True):
+            for option_id in dict.fromkeys(item["option_ids"]):
+                is_initial = option_id == payload["initial"]["choice"]
+                is_advice = option_id == payload["advice"]["choice"]
+                if is_initial and is_advice:
+                    role = "Your initial choice and AI recommendation"
+                elif is_initial:
+                    role = "Your initial choice"
+                elif is_advice:
+                    role = "AI-recommended option"
+                else:
+                    role = "Other option"
+                st.caption(names[option_id] + " · " + role)
             st.write("**" + labels[item["kind"]] + "**")
             safe_text(item["text"])
             with st.expander("Inspect cited evidence"):
@@ -98,26 +112,45 @@ def comparison_view(comparison, payload):
             safe_text(limitation)
 
 
-def workspace(key):
+def workspace(key, split="development", run_path=None):
+    locked = split == "holdout"
+    scope = split + ":" + (str(run_path) if run_path else "demo")
     st.subheader("Explore a fictional travel decision")
     st.caption("Three destinations. Your reasoning first. Advice second. Then a chance to reflect.")
-    cases = [load_case(p.stem) for p in case_paths("development")]
-    options = {c["id"]: c for c in cases}
-    selected = st.selectbox("Demo scenario", list(options),
+    options = {p.stem: load_case(p.stem, split) for p in case_paths(split)}
+    selected = st.selectbox("Scenario", list(options), key="scenario_" + scope,
                             format_func=lambda i: i + " · " + options[i]["title"])
-    if "flow" not in st.session_state:
-        st.session_state.flow = Workflow(options[selected])
+
+    def open_case(case_id):
+        st.session_state.flow = saved_flow(run_path, case_id) if run_path else Workflow(options[case_id])
+        st.session_state.flow_scope = scope
         st.session_state.workspace_generation_errors = []
-    flow = st.session_state.flow
-    if st.button("Start a new decision", help="Download any existing record first; this starts a separate record."):
-        st.session_state.flow = Workflow(options[selected])
-        st.session_state.workspace_generation_errors = []
+        st.session_state.workspace_version = None
+        st.session_state.decision_serial = st.session_state.get("decision_serial", 0) + 1
+
+    if "flow" not in st.session_state or st.session_state.get("flow_scope") != scope:
+        open_case(selected)
+    label = "Open selected case" if run_path else "Start a new decision"
+    if st.button(label, help="Download an exploratory decision before replacing it. Collected cases reopen their saved result without another request."):
+        open_case(selected)
         st.rerun()
+    flow = st.session_state.flow
     case, record = flow.case, flow.record
+    widget_scope = scope + ":" + case["id"] + ":" + str(st.session_state.get("decision_serial", 0))
+    attempt_path = Path(run_path) / (case["id"] + ".json") if run_path else None
+    attempt = read_json(attempt_path) if attempt_path and attempt_path.exists() else None
+    fixed_input = record["initial"] is None or record["initial"] == case["initial"]
+    formal = bool(run_path and fixed_input)
     live_comparison = bool(record["comparison"] and (record.get("generation") or {}).get("backend") == "live")
     names = {o["id"]: o["name"] for o in case["options"]}
     st.caption("Current decision: " + case["id"] + " · " + case["title"])
-    st.info(case["context"])
+    if locked:
+        st.info("Final evaluation: initial inputs are fixed. Your optional follow-up is saved separately and is not a measure of human improvement.")
+    elif run_path:
+        st.info("Development collection: unchanged initial inputs enter the review run. Edited inputs are exploratory demonstrations and stay outside that run.")
+    st.text_area("Default travel prompt", value=case["context"], disabled=True,
+                 height=140, key="context_" + widget_scope)
+    st.caption("This fixed budget-conscious student context accompanies your stated priorities and firm requirements.")
     for col, option in zip(st.columns(3), case["options"]):
         with col, st.container(border=True):
             st.subheader(option["name"])
@@ -126,18 +159,21 @@ def workspace(key):
                 st.caption("Source " + fact["id"])
     if record["stage"] == "initial":
         st.subheader("1 · Record initial reasoning")
-        st.caption("The fields below contain a fictional traveler script. You can edit them for a demonstration; formal runs use the fixed scripts.")
+        st.caption("The fictional starting values are locked for final evaluation." if locked else
+                   "Edit these fictional starting values to try the app. Advice stays scripted, so it may not match your edits.")
         initial = case["initial"]
-        with st.form("initial_form"):
-            choice = st.selectbox("Initial destination", list(names), index=list(names).index(initial["choice"]), format_func=names.get)
-            confidence = st.slider("Initial confidence", 0, 100, int(initial["confidence"]))
-            priorities = st.text_area("Flexible priorities (one per line)", "\n".join(initial["priorities"]))
-            constraints = st.text_area("Firm requirements (one per line; may be empty)", "\n".join(initial["constraints"]))
-            reasons = st.text_area("Initial reasons", initial["reasons"])
+        with st.form("initial_" + widget_scope):
+            choice = st.selectbox("Initial destination", list(names), index=list(names).index(initial["choice"]), format_func=names.get, disabled=locked)
+            confidence = st.slider("Initial confidence", 0, 100, int(initial["confidence"]), disabled=locked)
+            priorities = st.text_area("Flexible priorities (one per line)", "\n".join(initial["priorities"]), disabled=locked)
+            constraints = st.text_area("Firm requirements (one per line; may be empty)", "\n".join(initial["constraints"]), disabled=locked)
+            reasons = st.text_area("Initial reasons", initial["reasons"], disabled=locked)
             submitted = st.form_submit_button("Preserve initial reasoning", type="primary")
         if submitted:
             try:
-                flow.commit_initial(dict(choice=choice, confidence=confidence, priorities=lines(priorities), constraints=lines(constraints), reasons=reasons))
+                # Use the fixed record on the server as well as disabling the controls.
+                value = copy.deepcopy(initial) if locked else dict(choice=choice, confidence=confidence, priorities=lines(priorities), constraints=lines(constraints), reasons=reasons)
+                flow.commit_initial(value)
                 st.rerun()
             except ValueError as exc:
                 st.error(str(exc))
@@ -149,7 +185,7 @@ def workspace(key):
         judgment_view(record["initial"], names)
     with right:
         st.subheader("2 · Examine advice and evidence")
-        st.caption("Demo note: scripted advice is used in this demonstration. It represents AI advice and is not generated live.")
+        st.caption("Demo note: scripted advice is used in this prototype. It represents AI advice and is not generated live.")
         if record["stage"] == "committed":
             if st.button("Reveal AI advice", type="primary"):
                 flow.reveal()
@@ -160,14 +196,27 @@ def workspace(key):
         if record["stage"] == "advice":
             if not key:
                 st.info("The LLM is not connected. You can view the demo advice, but a comparison and reflection question will be available only after the LLM is configured.")
-            if st.button("Generate comparison and question", disabled=not key, type="primary"):
+            if attempt and formal:
+                st.error("This case already has a recorded attempt. It will not be retried or overwritten. Preserve its error in the run bundle.")
+                st.caption(comparison_error_message(GenerationError(attempt.get("error", ""), attempt.get("generation", {}))))
+            if run_path and not fixed_input:
+                st.caption("Edited development inputs: this comparison is exploratory and will not enter the fixed-case review run.")
+            if st.button("Generate comparison and question", disabled=not key or bool(attempt and formal), type="primary"):
                 try:
                     with st.spinner("Comparing the stated reasoning with the evidence…"):
-                        output, generation = generate(model_input(case, record["initial"]),
-                                                      "live", api_key=key)
-                    flow.attach_comparison(output, generation)
+                        if formal:
+                            collected = run_case(run_path, case["id"], key)
+                            st.session_state.flow = saved_flow(run_path, case["id"])
+                            if collected["status"] != "success":
+                                st.session_state.workspace_generation_errors.append({"at": now(), "error": collected["error"], "generation": collected.get("generation", {})})
+                        else:
+                            if locked:
+                                raise ValueError("Final evaluation requires a fixed-case run.")
+                            st.session_state.workspace_version = inventory()
+                            output, generation = generate(model_input(case, record["initial"]), "live", api_key=key)
+                            flow.attach_comparison(output, generation)
                     st.rerun()
-                except (ValueError, GenerationError) as exc:
+                except (ValueError, GenerationError, OSError) as exc:
                     st.session_state.workspace_generation_errors.append({"at": now(), "error": str(exc), "generation": getattr(exc, "artifact", {})})
                     st.error(comparison_error_message(exc))
                     st.caption("No comparison was generated. Your original reasoning is preserved.")
@@ -178,10 +227,10 @@ def workspace(key):
             st.info("This decision contains an earlier software preview, not an LLM comparison. Download the record if needed, then start a new decision to request a real comparison.")
     if live_comparison:
         st.subheader("3 · Record reflection and next decision")
-        st.caption("The comparison refers to your preserved initial reasoning. New responses are saved separately; they do not rewrite the original or trigger another model call.")
+        st.caption("The comparison refers to your preserved initial reasoning. New responses are saved separately; they do not rewrite the original or trigger another model call. These responses are not evidence of improved human decision-making.")
         previous = record["followups"][-1] if record["followups"] else record["initial"]
         index = len(record["followups"])
-        with st.form("followup_" + str(index)):
+        with st.form("followup_" + widget_scope + "_" + str(index)):
             action = st.selectbox("Decision action", ["retain", "revise", "defer"])
             choice = st.selectbox("Destination (ignored if you defer)", list(names),
                                   index=list(names).index(previous["choice"]) if previous["choice"] else 0, format_func=names.get)
@@ -193,19 +242,28 @@ def workspace(key):
             submitted = st.form_submit_button("Save follow-up", type="primary")
         if submitted:
             try:
-                flow.followup(dict(action=action, choice=None if action == "defer" else choice, confidence=confidence,
-                                   priorities=lines(priorities), constraints=lines(constraints), reflection=reflection, reasons=reasons))
+                response = dict(action=action, choice=None if action == "defer" else choice, confidence=confidence,
+                                priorities=lines(priorities), constraints=lines(constraints), reflection=reflection, reasons=reasons)
+                if formal and attempt and attempt["status"] == "success":
+                    st.session_state.flow = save_followup(run_path, case["id"], response)
+                else:
+                    flow.followup(response)
                 st.rerun()
-            except ValueError as exc:
+            except (ValueError, OSError) as exc:
                 st.error(str(exc))
         for i, followup in enumerate(record["followups"], 1):
             with st.expander("Saved response %d · %s" % (i, followup["action"]), expanded=i == len(record["followups"])):
                 judgment_view(followup, names)
                 safe_text("Reflection: " + followup["reflection"])
-    st.download_button("Download this decision record", json.dumps({**flow.public(), "generation_errors": st.session_state.workspace_generation_errors}, indent=2, ensure_ascii=False),
+    version = read_json(Path(run_path) / "run.json")["release_files"] if formal else st.session_state.get("workspace_version")
+    export = {**flow.public(), "purpose": "fixed_case_evaluation" if formal else "exploratory_demonstration",
+              "split": split, "release_files": version, "followups_used_for_effectiveness": False,
+              "generation_errors": st.session_state.workspace_generation_errors}
+    if formal and attempt and attempt["status"] == "error":
+        export["saved_failure"] = {"error": attempt["error"], "generation": attempt.get("generation", {})}
+    st.download_button("Download this decision record", json.dumps(export, indent=2, ensure_ascii=False),
                        file_name=case["id"] + "_decision_record.json", mime="application/json")
-    st.caption("Download before closing or refreshing the browser. This free cloud prototype does not promise permanent session storage.")
-
+    st.caption("Download before closing or refreshing the browser. Use the run-bundle download to preserve all evaluation cases and reviews.")
 
 def review_editor(path):
     review_path = path / "review.json"
@@ -281,77 +339,90 @@ def review_editor(path):
                 st.error(str(exc))
 
 
-def research_console(key):
-    st.subheader("Research runs · no participants")
-    st.write("Run the fixed fictional scripts, review the generated artifacts, then freeze before holdout. One click processes one case. Nothing runs automatically.")
-    st.warning("Download the run bundle after each case or review session. Cloud files can disappear on restart. Upload the bundle to resume.")
+
+def study_tools(key, split):
     if "research_temp" not in st.session_state:
         st.session_state.research_temp = tempfile.TemporaryDirectory(prefix="metacog_")
     base = Path(st.session_state.research_temp.name)
-    current = st.session_state.get("research_path")
-    if not current:
-        if st.button("Start development run", disabled=not key):
-            path = base / ("development_" + str(time.time_ns()))
-            new_run(path, "development")
-            st.session_state.research_path = str(path)
-            st.rerun()
+    slot = "study_" + split
+    current = st.session_state.get(slot)
+    with st.expander("Evaluation records, review, and downloads", expanded=False):
+        st.caption("For the video or exploratory edits, use Development normally. Start a development run here to collect unchanged cases for review and freeze. Download bundles before leaving or rebooting.")
+        if split == "development":
+            if not current:
+                if st.button("Start development run", disabled=not key):
+                    try:
+                        path = base / ("development_" + str(time.time_ns()))
+                        new_run(path, "development")
+                        st.session_state[slot] = str(path)
+                        st.session_state.collect_development = True
+                        st.rerun()
+                    except (ValueError, OSError) as exc:
+                        st.error("Could not start the research run. " + str(exc))
+                        st.caption("No model request was made.")
+            else:
+                st.checkbox("Use saved development run", value=True, key="collect_development")
+                st.caption("Turn this off to make a separate editable demonstration; the saved run remains available.")
+        elif not current:
+            development = st.session_state.get("study_development")
+            frozen = Path(development) / "frozen.json" if development else None
+            if frozen and frozen.exists():
+                try:
+                    verify_manifest(frozen)
+                    acknowledged = st.checkbox("I downloaded the frozen development bundle")
+                    if st.button("Start final evaluation", disabled=not acknowledged or not key):
+                        path = base / ("holdout_" + str(time.time_ns()))
+                        new_run(path, "holdout", frozen)
+                        st.session_state[slot] = str(path)
+                        st.rerun()
+                except (ValueError, OSError) as exc:
+                    st.error(str(exc))
+            else:
+                st.info("Final evaluation is locked. Collect and review all 12 fixed development cases, then freeze the version. You can also restore its downloaded frozen bundle here.")
+        if current:
+            path = Path(current)
+            run = read_json(path / "run.json")
+            count = run["succeeded"] + run["failed"]
+            st.write("Saved attempts: %d / %d · Successful: %d · Failed: %d" % (count, len(run["case_ids"]), run["succeeded"], run["failed"]))
+            st.progress(count / len(run["case_ids"]))
+            st.download_button("Download run bundle", bundle_bytes(path), file_name=split + "_run_bundle.zip", mime="application/zip")
+            if split == "development":
+                keep = st.checkbox("I downloaded this run and want a new development run")
+                if st.button("Start fresh development run", disabled=not keep or not key):
+                    try:
+                        path = base / ("development_" + str(time.time_ns()))
+                        new_run(path, "development")
+                        st.session_state[slot] = str(path)
+                        st.rerun()
+                    except (ValueError, OSError) as exc:
+                        st.error(str(exc))
         upload = st.file_uploader("Restore a downloaded run bundle", type=["zip"])
-        if upload and st.button("Restore run"):
+        replace_ok = st.checkbox("I downloaded any current run before restoring another bundle")
+        if upload and st.button("Restore run", disabled=not replace_ok):
             try:
                 path = base / ("restored_" + str(time.time_ns()))
                 restore_bundle(upload.getvalue(), path)
-                st.session_state.research_path = str(path)
+                restored = read_json(path / "run.json")
+                st.session_state["study_" + restored["split"]] = str(path)
+                st.session_state.restored_notice = "Bundle restored. Select Development or Final evaluation to access the corresponding saved run."
                 st.rerun()
             except (ValueError, KeyError, OSError) as exc:
                 st.error(str(exc))
-        if not key:
-            st.info("Set GEMINI_API_KEY in cloud Secrets to enable real model runs. Research runs never use software fixtures.")
-        return
-    path = Path(current)
-    run = read_json(path / "run.json")
-    total = len(run["case_ids"])
-    count = run["succeeded"] + run["failed"]
-    st.write("**Split:**", run["split"], "· **Completed attempts:**", count, "/", total)
-    st.progress(count / total)
-    st.caption("Successful outputs: %d · Technical failures: %d" % (run["succeeded"], run["failed"]))
-    if run["status"] == "running":
-        if st.button("Run next case with Gemini", disabled=not key):
-            if time.time() - st.session_state.get("last_call", 0) < 10:
-                st.info("Allow 10 seconds between requests to reduce free-tier rate-limit errors.")
-            else:
-                try:
-                    st.session_state.last_call = time.time()
-                    with st.spinner("Collecting one comparison and one reflection question…"):
-                        run_next(path, key)
-                    st.rerun()
-                except (ValueError, GenerationError) as exc:
-                    st.error(str(exc))
-    else:
-        review_editor(path)
-    for case_id in run["case_ids"]:
-        target = path / (case_id + ".json")
-        if target.exists():
-            attempt = read_json(target)
-            if attempt["status"] == "error":
-                st.error(case_id + ": " + attempt["error"])
-    st.download_button("Download run bundle (outputs, reviews, and freeze if present)", bundle_bytes(path),
-                       file_name=run["split"] + "_run_bundle.zip", mime="application/zip")
-    if (path / "frozen.json").exists() and run["split"] == "development":
-        acknowledged = st.checkbox("I downloaded the frozen development bundle and am ready to begin holdout testing")
-        if st.button("Start holdout run", disabled=not acknowledged or not key):
-            try:
-                verify_manifest(path / "frozen.json")
-                holdout = base / ("holdout_" + str(time.time_ns()))
-                new_run(holdout, "holdout", path / "frozen.json")
-                st.session_state.research_path = str(holdout)
-                st.rerun()
-            except ValueError as exc:
-                st.error(str(exc))
-    with st.expander("Switch to another saved run"):
-        preserve = st.checkbox("I downloaded the current run bundle")
-        if st.button("Close this run view", disabled=not preserve):
-            del st.session_state.research_path
-            st.rerun()
+        if st.session_state.get("restored_notice"):
+            st.info(st.session_state.restored_notice)
+    if split == "development" and not st.session_state.get("collect_development", True):
+        return None
+    if current:
+        path = Path(current)
+        run = read_json(path / "run.json")
+        if run["release_files"] != inventory():
+            st.error("The saved run belongs to a different project version. Download it and start a new development run; do not mix results.")
+            return False
+        if split == "holdout" and (run.get("frozen_manifest", {}).get("status") != "frozen" or run["frozen_manifest"]["files"] != inventory()):
+            st.error("Final evaluation requires a matching frozen version.")
+            return False
+        return path
+    return None
 
 
 def main():
@@ -364,30 +435,26 @@ def main():
             st.success("LLM configured")
         else:
             st.info("LLM not connected")
-    page = st.query_params.get("view", "workspace")
-    if page not in ("research", "setup"):
-        workspace(key)
-        return
-    st.caption("Researcher area")
-    left, middle, right = st.columns(3)
-    for column, label, destination in ((left, "Decision workspace", "workspace"),
-                                       (middle, "Research console", "research"),
-                                       (right, "Setup", "setup")):
-        if column.button(label, disabled=page == destination):
-            st.query_params["view"] = destination
-            st.rerun()
-    if page == "research":
-        research_console(key)
-    else:
+    mode = st.selectbox("Data set", ["Development", "Final evaluation"], key="dataset_mode")
+    split = "development" if mode == "Development" else "holdout"
+    try:
+        path = study_tools(key, split)
+        if path is not False:
+            if split == "holdout" and path is None:
+                st.info("Final-evaluation scenarios become available after a reviewed freeze. Use Development for editable demonstrations.")
+            else:
+                workspace(key, split, path)
+        if path and read_json(path / "run.json")["status"] == "complete":
+            if st.checkbox("Show evaluation review and freeze tools", key="review_open_" + str(path)):
+                review_editor(path)
+    except (ValueError, OSError, KeyError) as exc:
+        st.error("Could not open the selected records. " + str(exc))
+    with st.expander("Model setup and study scope", expanded=False):
         st.write("Configured model: " + settings()["model"])
-        st.caption("LLM configured means a key is present. A successful comparison is needed to confirm model access.")
-        st.subheader("What is scripted and what uses the LLM?")
-        st.table({"Component": ["Destination descriptions", "Initial traveler profile and later responses", "Recommendation being examined", "Comparison and reflection question", "Review scores"],
-                  "Source": ["Fixed fictional scripts", "Fixed fictional scripts during research; editable in demos", "Prewritten advice", "One real Gemini API call", "Researcher using predefined criteria"]})
-        st.write("Deploy streamlit_app.py from a private GitHub repository on Streamlit Community Cloud. In Settings → Secrets add GEMINI_API_KEY. Keep your Gemini project on the free tier; the app does not enable billing or switch to paid models.")
-        st.write("Free-tier quota depends on your account. An unavailable or limited model produces a recorded error. It is never replaced with a scripted answer.")
-        st.write("The evaluation concerns tool outputs. It cannot show improved human reflection, reduced bias, increased trust, or better real decisions. Confidence values are fictional and are not metacognitive accuracy measurements.")
-        st.info("No live development or holdout research outputs ship with this project. Complete development review and freeze the version before holdout.")
+        st.caption("LLM configured means a key is present. A successful comparison confirms access for that request.")
+        st.write("In Streamlit Settings → Secrets, set GEMINI_API_KEY. Keep the API project on the free tier if you want free-only usage. Quotas and model access depend on your account.")
+        st.write("Destination facts and advice are scripted. Only the comparison and reflection question use the LLM. Edited development demonstrations are excluded from fixed-case runs. Initial final-evaluation inputs are locked; optional follow-ups are saved separately and are not evidence of human improvement.")
+        st.write("Review the tool's fidelity, evidence handling, tradeoffs, and question quality. Do not use holdout outputs to tune the app and then report the same cases as untouched tests.")
 
 
 if __name__ == "__main__":

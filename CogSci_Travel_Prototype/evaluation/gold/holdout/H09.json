@@ -9,10 +9,10 @@
     {
       "id": "H09-E01",
       "category": "uncertainty",
-      "description": "A has conflicting 2-hour and 4.5-hour evidence; compliance with the travel cap is unresolved.",
+      "description": "Hearth Cove has conflicting 2-hour and 4.5-hour evidence; compliance with the travel cap is unresolved.",
       "source_ids": [
-        "A.2",
-        "A.3",
+        "C.2",
+        "C.3",
         "initial.constraints"
       ]
     },
@@ -21,8 +21,8 @@
       "category": "unsupported_claim",
       "description": "Advice selects one time without a basis for discarding the other.",
       "source_ids": [
-        "A.2",
-        "A.3",
+        "C.2",
+        "C.3",
         "advice"
       ]
     },
@@ -31,8 +31,8 @@
       "category": "question",
       "description": "Ask how to establish which route time applies.",
       "source_ids": [
-        "A.2",
-        "A.3"
+        "C.2",
+        "C.3"
       ]
     }
   ],

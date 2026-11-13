@@ -1,14 +1,22 @@
-# Evaluation protocol v1.0 — prepared before live runs
+# Evaluation protocol v1.2 — development revision, November 12, 2026
 
 ## Unit and scope
 
-One initial comparison plus its one reflection question is the evaluation unit. Collect one output per case with the same model settings. There are 12 development and 12 holdout cases. This is an artifact evaluation, with no recruited users, survey, experimental treatment groups, or correct-destination accuracy metric. Scripted follow-ups test storage and action handling; they are not caused by the generated question and are not human outcome measurements.
+One initial comparison plus its one reflection question is the evaluation unit. Collect one output per case with the same model settings. There are 12 development and 12 holdout cases. This is an artifact evaluation, with no recruited users, survey, experimental treatment groups, or correct-destination accuracy metric. The shared browser interface accepts optional interactive follow-ups and saves them separately from the evaluated attempt. They are excluded from effectiveness measures. Optional CLI/software checks still use scripted follow-ups to test storage; neither kind establishes a human outcome.
+
+The original protocol was prepared before live runs. This revision follows two user-supplied development demonstrations; it does not represent a completed research evaluation. A later structural revision balances holdout positions before evaluation, preserving all facts, named choices, expected reasoning, and reference meanings. No holdout model outputs informed that revision.
+
+## Shared interface
+
+Select Development for editable demonstration inputs. Under Evaluation records, review, and downloads, start a development run to collect unchanged case inputs through the same preserve → reveal → compare flow. An edited development input is exploratory and excluded from the fixed run. Review/freeze tools appear only after all 12 attempts are recorded. Final evaluation remains locked until a reviewed freeze; its initial fields are fixed, including server-side collection. Case order is selectable, but each attempt is saved once and cannot be overwritten. Reopening is display only. Keep old results and never restart selectively for a better response.
+
+Interactive follow-ups are separate files linked to the immutable attempt hash, with their original timestamps. They cannot alter comparison inputs/outputs or review hashes and are not scored as human improvement. A run bundle includes these files for demonstration provenance. The unit of evaluation remains the original comparison and question.
 
 ## Sequence
 
 1. Confirm data and software checks. Inspect the development case expectations. Correct data authoring mistakes before live collection.
-2. Set up the free-tier model account. Collect the 12 development outputs through Research console, preserving every attempt. Check API compatibility and real model behavior; this has **not** been done in the delivered preparation package.
-3. Review development outputs using the five rubric dimensions, case-specific observations, and every-finding evidence audit. Record concrete failures, examples, and any prompt/app changes in your research notes.
+2. Set up the free-tier model account. Collect the 12 development outputs through the shared interface or the CLI, preserving every attempt. Check API compatibility and real model behavior; this has **not** been done in the delivered preparation package.
+3. Review development outputs using the five rubric dimensions, case-specific observations, and every-finding evidence audit. Record concrete failures, examples, and any prompt/app changes in `DEVELOPMENT_LOG.md`.
 4. If changing code, prompts, schema, model/settings, rubric, or data, preserve the old run and collect a new development run under the final candidate. Do not tune against holdout model outputs.
 5. Freeze only after all 12 development calls succeed and a complete manual review records readiness. Low quality scores are not automatically disqualifying: document limitations and decide whether the prototype is ready. The gate checks review completeness, not a hidden quality threshold.
 6. Download the frozen development bundle. The freeze records hashes of code, configuration, prompts, schema, rubric/protocol, both input sets, and both expectation sets. The app will reject changed files.
@@ -22,6 +30,8 @@ One initial comparison plus its one reflection question is the evaluation unit. 
 For each prewritten observation, mark **covered / partial / missed** and explain ratings in the case rationale. These observations include expected reasoning behaviors and the reflection target; they are not a correct-choice label. Each expected observation counts once, even when the output repeats it.
 
 Audit **every generated finding**, including extra findings not in the expectations, as **supported / partly_supported / unsupported**, with an evidence note. A reference to a valid fact ID is insufficient if the fact does not support the actual assertion. Inspect summaries, interpretations, and the question for additional errors and document them separately. The finding-level denominator is findings only; it must not be described as a rate over all sentences or all claims in the output.
+
+When reading each output, inspect both the initial choice/reasons and AI-recommended choice/advice. Distinguish factual accuracy, firm-requirement compliance, and fit with flexible priorities; a true advice statement need not justify a recommendation. Check that a claim about a requirement or priority cites both the relevant destination evidence and that requirement or priority. Missing evidence for difficulty, accessibility, or an activity's availability must not become a confident claim. Card role labels identify destinations only; they do not prove the claim. Do not require all finding categories in every case.
 
 Rate questions for relevance, focus, evidence grounding, and neutrality, not whether a scripted follow-up changed the destination. A question that assumes a false premise, pressures acceptance of AI, treats reasonable disagreement as error, or presumes that priorities cannot change receives a low rating. Appropriate supported agreement should not require an invented concern.
 

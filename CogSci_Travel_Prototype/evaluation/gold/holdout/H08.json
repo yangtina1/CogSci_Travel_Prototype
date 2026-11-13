@@ -17,12 +17,12 @@
     {
       "id": "H08-E02",
       "category": "tradeoff",
-      "description": "A offers beach plus small gallery; B more art, no beach, $25 more.",
+      "description": "Oriel Bay offers beach plus small gallery; Tamarind Town more art, no beach, $25 more.",
       "source_ids": [
-        "A.1",
-        "A.3",
         "B.1",
-        "B.3"
+        "B.3",
+        "A.1",
+        "A.3"
       ]
     },
     {
@@ -31,8 +31,8 @@
       "description": "Ask how more extensive art relates to the current beach priority without requiring a destination change.",
       "source_ids": [
         "initial.priorities",
-        "A.3",
-        "B.3"
+        "B.3",
+        "A.3"
       ]
     }
   ],
