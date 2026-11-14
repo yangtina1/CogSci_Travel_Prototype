@@ -35,6 +35,31 @@ def digest(value):
                                      allow_nan=False).encode()).hexdigest()
 
 
+def export_experiences(experiences):
+    """Portable session results for manual analysis, without implying automatic scores."""
+    import io
+    import zipfile
+    stream = io.BytesIO()
+    index = {"format": "pause_compare_sessions_v1", "exported_at": now(),
+             "note": "Experiences are not independent participants or automatic effectiveness scores. Preserve edited inputs, failures, and repeated cases when reporting results.",
+             "experiences": []}
+    with zipfile.ZipFile(stream, "w", zipfile.ZIP_DEFLATED) as archive:
+        for number, experience in enumerate(experiences, 1):
+            record = experience["record"]
+            case_id = experience["case"]["id"]
+            name = "%03d_%s_decision_record.json" % (number, case_id)
+            comparison_available = bool(record.get("comparison") and (record.get("generation") or {}).get("backend") == "live")
+            errors = len(experience.get("generation_errors", []))
+            index["experiences"].append({"file": name, "case_id": case_id, "split": experience["split"],
+                "created_at": record["created_at"], "input_matches_predefined_case": experience["input_matches_predefined_case"],
+                "comparison_available": comparison_available, "recorded_failures": errors,
+                "recorded_generation_attempts": errors + int(comparison_available),
+                "followup_count": len(record["followups"])})
+            archive.writestr(name, json.dumps(experience, indent=2, ensure_ascii=False))
+        archive.writestr("results_index.json", json.dumps(index, indent=2, ensure_ascii=False))
+    return stream.getvalue()
+
+
 def require(condition, message):
     if not condition:
         raise ValueError(message)

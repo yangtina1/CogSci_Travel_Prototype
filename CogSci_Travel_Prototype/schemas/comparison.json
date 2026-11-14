@@ -39,13 +39,23 @@
             "items": {
               "type": "string"
             }
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "initial_reasoning",
+              "ai_advice",
+              "both",
+              "options"
+            ]
           }
         },
         "required": [
           "kind",
           "text",
           "source_ids",
-          "option_ids"
+          "option_ids",
+          "target"
         ],
         "additionalProperties": false
       }

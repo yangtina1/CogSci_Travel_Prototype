@@ -25,35 +25,28 @@ Streamlit can run an entrypoint in a repository subfolder and find the dependenc
 
 ## One interface, two data sets
 
-Use the normal app URL. The **Data set** selector switches between **Development** and **Final evaluation**. Older `?view=research` and `?view=setup` links now open the same interface. The sidebar shows only LLM status; model setup is in a collapsed section at the bottom.
+Use the normal app URL. In the sidebar, below **LLM status**, choose **Development** (D01–D12) or **Test** (H01–H12). Select a scenario to load it immediately. Both sets use the same editable interface. There is no research console, run-start control, or enforced freeze gate. Older research/setup URLs also open this interface.
 
-Both modes use the same three steps: preserve initial reasoning, reveal scripted AI advice and request a comparison, then optionally record a reflection and next decision. The visible default travel prompt keeps the budget-conscious student context fixed. Destination descriptions and advice are scripted; Gemini generates only the comparison and one reflection question. The advice disclosure stays visible. Findings name the destination and its role, and distinguish requirement conflicts, preference tradeoffs, unsupported claims, and uncertainty. Support applies to a particular finding, not to a destination overall.
+1. Read the three fictional destinations and the fixed default budget-conscious student prompt. Edit your initial destination, confidence, priorities, firm requirements, and reasons as needed.
+2. Choose **Preserve initial reasoning**, then **Reveal AI advice**. The prominent advice section retains the disclosure that advice is scripted for the demo; it does not change when you edit your preferences.
+3. Choose **Generate comparison and question**. Gemini compares the actual preserved inputs with the evidence and advice in one call. The comparison summary appears above detailed findings. Without an API key, generation is disabled; there is no fake comparison.
+4. Optionally record a reflection and retain, revise, or defer your decision. This appends a response without rewriting the initial record or making another LLM call.
 
-### Development and video demonstration
+Findings identify destinations and their roles. When both choices agree, the destination label says **Your choice and the AI recommendation**. Each finding also identifies whose claim is assessed: original reasoning, AI advice, both, or options compared. Green means a specific claim is supported; red means an unsupported claim or a firm requirement conflict; amber means unresolved information; blue means a flexible tradeoff. These are model classifications to inspect, not verified judgments or an overall endorsement of a destination. The evidence expander concerns the specific statement on that card. Categories appear only when generated; a tradeoff is not required in every case.
 
-Initial destination, confidence, priorities, requirements, and reasons are editable. Select a scenario, then **Start a new decision** to load it. Preserve your reasoning before revealing the advice. Later responses stay separate from the original reasoning and do not make another model call. Download a decision record before replacing an exploratory decision or refreshing the page. Edited inputs may conflict with the fixed advice; exposing that mismatch is part of the prototype.
+### Downloads after results
 
-### Collect fixed cases, review, and freeze
+**Download this decision record** appears below the experience after a comparison or failed attempt. It saves the preserved inputs, displayed advice, comparison/question, model metadata, later reflections, errors, and runtime version hashes as JSON.
 
-1. In Development, expand **Evaluation records, review, and downloads** and choose **Start development run**. Leave **Use saved development run** checked.
-2. Choose a case and **Open selected case**. Keep its initial fields unchanged, preserve them, reveal advice, and generate the comparison. Repeat for all 12 cases. Order is selectable; each case is recorded only once. Reopening a collected case displays its saved result without another API call.
-3. Edits remain allowed, but an edited case is explicitly labeled exploratory and is excluded from the fixed run. Use **Open selected case** to reload its original inputs for collection. Turn off **Use saved development run** for independent demonstrations; the run remains saved.
-4. Download the run bundle regularly. When all attempts finish, enable **Show evaluation review and freeze tools**, select **Prepare review packet**, and complete all ratings, finding audits, and rationales. Preserve failed attempts. A run with failures cannot be frozen; resolve the problem and start a new development run with a documented reason.
-5. After all 12 successful cases are reviewed, mark readiness and choose **Freeze reviewed development version**. Download the frozen bundle. Any code, prompt, data, rubric or settings change requires a new development run and freeze.
+**Download all saved results (ZIP)** appears at the bottom once there is a result or failed attempt. It collects experiences across both data sets during the current browser session. Each experience has a JSON file; `results_index.json` lists the case, split, whether inputs match the predefined case, failures, comparison availability, and follow-up count. Adding a reflection updates that experience; starting the same case again creates a separate experience. The ZIP supports later report review and does not calculate a cognitive improvement score.
 
-### Final evaluation
+Download regularly and before refreshing, closing, or rebooting: session storage can disappear. The current interface does not restore ZIPs; keep downloads on your own storage for review. Switching cases saves completed comparisons and failed attempts in the session, but an initial draft without a comparison/error is not collected. Returning to a case starts a new decision; it does not regenerate anything unless you click Generate. **Start a new decision** resets the current case to its prefilled values.
 
-Select **Final evaluation**. It stays locked until a matching reviewed development freeze exists or is restored from a downloaded bundle. In **Evaluation records, review, and downloads**, confirm you downloaded that bundle, then **Start final evaluation**.
+### Development versus evaluation
 
-Select a holdout case and **Open selected case**. The same initial fields appear prefilled and locked; the server uses the predefined values even if a browser sends different values. Preserve the initial record, reveal advice, and request one comparison per case. Follow-up fields remain editable, but responses are saved separately and excluded from claims about effectiveness. They do not change the evaluated input/output or invalidate existing reviews. All 12 attempts must finish before the review tools appear. Do not tune from holdout outputs and then report those cases as untouched tests.
+Use Development for prompt/UI adjustments and the video demonstration. Before evaluating Test, save the chosen repository commit or source archive, model settings, rubric, and evaluation plan. This is a research procedure, not a software lock. For the planned standardized evaluation, leave Test's prefilled inputs unchanged and collect one comparison per case. Editable Test inputs are useful for exploration, but their outputs must be labeled separately; the export flags changed inputs and the original gold expectations may no longer apply.
 
-Each set has 12 cases, with initial choices and AI recommendations each balanced at four A, four B, and four C. Position corrections preserved facts and named choices and remapped all references. The holdout was reordered before evaluation, without using model outputs.
-
-### Downloads and recovery
-
-**Download this decision record** exports the current experience with its split and exploratory/evaluation label. **Download run bundle** preserves all collected attempts, raw model responses, optional follow-ups, review, and freeze. Restore a downloaded bundle in the same panel after a restart. Restoring does not repeat attempts. Version checks prevent mixing old results with updated files. Do not re-upload an old bundle to a changed app expecting it to qualify for the new version.
-
-Missing required files are reported by relative path. Preserve the folder structure, including the evaluation protocol and gold expectations. `.streamlit/config.toml` is optional when beginning a run; adding/removing it later changes the tracked version. No API key is written to exports. Keep the app's cloud sharing settings private during development and evaluation.
+Keep all attempts and repeated experiences, including failures. Do not tune using Test outputs and then describe the same cases as untouched holdout. Record any deviation. Both sets have 12 cases, with initial choices and AI recommendations each balanced at four A, four B, and four C. See `docs/EVALUATION_PROTOCOL.md` for manual review. Selecting Test does not make this a human-subject study or establish a benefit to human cognition.
 
 ## Which prompt can be revised?
 
@@ -63,7 +56,7 @@ The case files contain the evidence and scripted reasoning/advice that the model
 
 ## Files
 
-- `streamlit_app.py`: shared interface, evaluation collection, and review tools.
+- `streamlit_app.py`: interactive interface and session downloads.
 - `metacog/`: workflow, Gemini connection, validation, review, and record handling.
 - `config/model.json`: model and generation settings.
 - `prompts/comparison.txt`: shared comparison instructions.

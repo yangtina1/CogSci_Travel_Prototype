@@ -1,4 +1,4 @@
-# Evaluation protocol v1.2 — development revision, November 12, 2026
+# Evaluation protocol v1.3 — interface revision, November 13, 2026
 
 ## Unit and scope
 
@@ -6,22 +6,18 @@ One initial comparison plus its one reflection question is the evaluation unit. 
 
 The original protocol was prepared before live runs. This revision follows two user-supplied development demonstrations; it does not represent a completed research evaluation. A later structural revision balances holdout positions before evaluation, preserving all facts, named choices, expected reasoning, and reference meanings. No holdout model outputs informed that revision.
 
-## Shared interface
+## Shared interface and evaluation sequence
 
-Select Development for editable demonstration inputs. Under Evaluation records, review, and downloads, start a development run to collect unchanged case inputs through the same preserve → reveal → compare flow. An edited development input is exploratory and excluded from the fixed run. Review/freeze tools appear only after all 12 attempts are recorded. Final evaluation remains locked until a reviewed freeze; its initial fields are fixed, including server-side collection. Case order is selectable, but each attempt is saved once and cannot be overwritten. Reopening is display only. Keep old results and never restart selectively for a better response.
+The sidebar offers Development and Test immediately. Both use editable prefilled inputs and the same preserve → reveal → compare → respond flow. No software freeze or completed development run is required to open Test. This accessibility does not remove the methodological separation between development and evaluation.
 
-Interactive follow-ups are separate files linked to the immutable attempt hash, with their original timestamps. They cannot alter comparison inputs/outputs or review hashes and are not scored as human improvement. A run bundle includes these files for demonstration provenance. The unit of evaluation remains the original comparison and question.
+1. Validate the software and inspect the development expectations. Use Development to check model access, collect outputs, review errors, and refine the comparison prompt or application. Record changes in `DEVELOPMENT_LOG.md`.
+2. Before Test collection, save the selected code/commit, prompt, model settings, schema, data, expectations, rubric, and this protocol. Document readiness and known limitations. The browser records runtime and case hashes per experience; keep a full source archive as well because those hashes do not include the review rubric or every project file.
+3. Collect one initial comparison/question per predefined Test case with unchanged initial inputs. Do not tune from these outputs. The same editable controls remain available for demonstrations; changed Test inputs are labeled exploratory and reviewed separately. Their existing gold expectations are not automatically valid.
+4. Download each decision or the accumulated session ZIP after attempts. Keep every repeated experience and failure. The index identifies the split, edited inputs, comparison availability, failures, and reflections. Session ZIPs are review artifacts, not resumable CLI run bundles.
+5. Review each comparison against the rubric, expected observations, and every-finding evidence audit below. Record ratings and rationales in a separate review table keyed to the exported filename and case ID; preserve raw exports unchanged. Keep development and Test results separate.
+6. Optional reflections are provenance for the demonstration, not evidence of improved cognition. They append to the preserved initial comparison record and do not trigger another model call.
 
-## Sequence
-
-1. Confirm data and software checks. Inspect the development case expectations. Correct data authoring mistakes before live collection.
-2. Set up the free-tier model account. Collect the 12 development outputs through the shared interface or the CLI, preserving every attempt. Check API compatibility and real model behavior; this has **not** been done in the delivered preparation package.
-3. Review development outputs using the five rubric dimensions, case-specific observations, and every-finding evidence audit. Record concrete failures, examples, and any prompt/app changes in `DEVELOPMENT_LOG.md`.
-4. If changing code, prompts, schema, model/settings, rubric, or data, preserve the old run and collect a new development run under the final candidate. Do not tune against holdout model outputs.
-5. Freeze only after all 12 development calls succeed and a complete manual review records readiness. Low quality scores are not automatically disqualifying: document limitations and decide whether the prototype is ready. The gate checks review completeness, not a hidden quality threshold.
-6. Download the frozen development bundle. The freeze records hashes of code, configuration, prompts, schema, rubric/protocol, both input sets, and both expectation sets. The app will reject changed files.
-7. Start one holdout run. Do not inspect holdout outputs to tune the implementation. Preserve successful responses and technical failures; do not selectively replace weak outputs.
-8. Review and summarize holdout using the frozen criteria. Save qualitative examples and discuss mistakes and limitations. Keep development results separate from holdout results.
+Optional CLI collection/review/freeze tools remain available with their own run format. Their stricter gates do not apply to the browser workflow. Choose one collection format for the planned evaluation and document it.
 
 ## Manual measures
 
@@ -31,7 +27,7 @@ For each prewritten observation, mark **covered / partial / missed** and explain
 
 Audit **every generated finding**, including extra findings not in the expectations, as **supported / partly_supported / unsupported**, with an evidence note. A reference to a valid fact ID is insufficient if the fact does not support the actual assertion. Inspect summaries, interpretations, and the question for additional errors and document them separately. The finding-level denominator is findings only; it must not be described as a rate over all sentences or all claims in the output.
 
-When reading each output, inspect both the initial choice/reasons and AI-recommended choice/advice. Distinguish factual accuracy, firm-requirement compliance, and fit with flexible priorities; a true advice statement need not justify a recommendation. Check that a claim about a requirement or priority cites both the relevant destination evidence and that requirement or priority. Missing evidence for difficulty, accessibility, or an activity's availability must not become a confident claim. Card role labels identify destinations only; they do not prove the claim. Do not require all finding categories in every case.
+When reading each output, inspect both the initial choice/reasons and AI-recommended choice/advice. Distinguish factual accuracy, firm-requirement compliance, and fit with flexible priorities; a true advice statement need not justify a recommendation. Check that a claim about a requirement or priority cites both the relevant destination evidence and that requirement or priority. Missing evidence for difficulty, accessibility, or an activity's availability must not become a confident claim. Destination role labels identify choices. The new target field identifies whose claim is assessed; colors reflect model-supplied categories and do not prove a claim. Audit incorrect role/target assignments and misleading colors as output/display errors. Do not require all finding categories in every case.
 
 Rate questions for relevance, focus, evidence grounding, and neutrality, not whether a scripted follow-up changed the destination. A question that assumes a false premise, pressures acceptance of AI, treats reasonable disagreement as error, or presumes that priorities cannot change receives a low rating. Appropriate supported agreement should not require an invented concern.
 
@@ -44,16 +40,15 @@ Rate questions for relevance, focus, evidence grounding, and neutrality, not whe
 - Include representative omissions, misleading questions, correct uncertainty handling, and well-supported agreement. Do not choose only impressive examples.
 - No inferential significance tests or human-effect claims are planned. A small synthetic case set with overlapping categories does not justify population estimates.
 
-The summary tool excludes technical failures from semantic-rating denominators but retains them in attempted-case totals. Describe this distinction explicitly. No-output failures must not silently disappear from the study.
+Exclude technical failures from semantic-rating denominators but retain them in attempted-case totals. The optional CLI summary tool uses this convention; browser ZIPs provide records and an index, not scores. Describe this distinction explicitly. No-output failures must not silently disappear from the study.
 
 ## Error and restart policy
 
-- There are no automatic API retries, alternate models, or fixture fallbacks. The raw failed response is retained where available.
-- A free-tier quota error is a technical failure, not evidence that the model reasoned incorrectly. Wait for quota recovery before the next unattempted case.
-- Downloads preserve incremental runs. After a restart, restore the bundle rather than creating duplicate successful cases. An interrupted started attempt is recorded as a technical failure; it is not silently retried.
-- If a development run contains errors, resolve access or configuration and start a new clearly named development run; retain the failed run. All 12 cases must succeed for the freeze gate.
-- If holdout fails for a systemic infrastructure issue, retain the original run. Decide and document a whole-run restart before examining replacement outputs; label the new run and report the earlier failures. Never rerun selected cases to obtain better-looking answers.
-- A necessary post-freeze code, prompt, data, or rubric fix invalidates that frozen study. Document it as a deviation; previously inspected cases cannot be presented as untouched holdout. Create a new evaluation set if using their results to tune.
+- No automatic API retries, alternate models, or fixture fallbacks. Failed responses are retained where available. Repeated button clicks are additional attempts, not replacements.
+- A quota failure is technical, not proof of bad reasoning. Preserve it before waiting for access recovery.
+- Download before a session ends. The browser does not restore archives. After losing a session, consult saved records to continue unattempted cases and document any missing records.
+- Document repeated attempts or a whole-run restart before inspecting replacement outputs. Never rerun selected cases just for better answers. Include failures in reporting and distinguish retries from independent cases.
+- If a post-selection change is necessary, retain old results and explain the deviation. Cases whose outputs informed tuning cannot be presented as untouched holdout for the revised version; use fresh cases for that claim.
 
 ## Interpretation and authorship limits
 
